@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidad de La Frontera
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="orm.Curso" table="curso" lazy="false">
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="increment">
+			</generator>
+		</id>
+		<property name="nombreCurso" column="nombreCurso" type="string" length="20" not-null="true" lazy="false"/>
+		<property name="estadocurso" column="estadocurso" type="integer" length="1" not-null="false" lazy="false"/>
+		<many-to-one name="director" cascade="lock" column="directorid" class="orm.Director" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="cupos" column="cupos" type="integer" length="2" not-null="false" lazy="false"/>
+		<set name="ORM_Curso_profesor" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cursoid" not-null="true"/>
+			<one-to-many class="orm.Curso_profesor"/>
+		</set>
+		<set name="ORM_Estudiante_curso" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="cursoid" not-null="true"/>
+			<one-to-many class="orm.Estudiante_curso"/>
+		</set>
+	</class>
+</hibernate-mapping>

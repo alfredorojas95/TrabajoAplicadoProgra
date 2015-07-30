@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidad de La Frontera
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="orm.Estudiante_curso" table="estudiante_curso" lazy="false">
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="increment">
+			</generator>
+		</id>
+		<many-to-one name="estudiante" cascade="lock" column="estudianteid" class="orm.Estudiante" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="curso" cascade="lock" column="cursoid" class="orm.Curso" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
+		<property name="promedio" column="promedio" type="double" length="5" not-null="false" lazy="false"/>
+		<property name="porcAsistencia" column="porcAsistencia" type="double" length="5" not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

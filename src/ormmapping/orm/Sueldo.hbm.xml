@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+Licensee: Universidad de La Frontera
+License Type: Academic
+-->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="orm.Sueldo" table="sueldo" lazy="false">
+		<id name="id" column="id" type="integer" unsaved-value="0">
+			<generator class="increment">
+			</generator>
+		</id>
+		<property name="monto" column="monto" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="mes" column="mes" type="integer" length="2" not-null="true" lazy="false"/>
+		<property name="cantCursos" column="cantCursos" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="estadoPago" column="estadoPago" type="integer" length="10" not-null="true" lazy="false"/>
+		<set name="ORM_Sueldo_profesor" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="sueldoid" not-null="true"/>
+			<one-to-many class="orm.Sueldo_profesor"/>
+		</set>
+	</class>
+</hibernate-mapping>
