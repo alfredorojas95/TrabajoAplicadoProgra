@@ -12,7 +12,7 @@ License Type: Academic
 			<key-many-to-one name="ORM_Profesor" column="profesorid" class="orm.Profesor">
 			</key-many-to-one>
 		</composite-id>
-		<many-to-one name="jefeadministracion" cascade="lock" column="jefeadministracionid" class="orm.Jefeadministracion" not-null="true" lazy="no-proxy" access="field">
+		<many-to-one name="jefeadministracion" cascade="lock" column="jefeadministracionid" class="orm.Jefeadministracion" not-null="false" lazy="no-proxy" access="field">
 		</many-to-one>
 	</class>
 </hibernate-mapping>

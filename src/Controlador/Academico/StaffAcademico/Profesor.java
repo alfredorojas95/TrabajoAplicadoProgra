@@ -19,16 +19,14 @@ public class Profesor extends Persona {
 	 * 
 	 * @param NuevaPer
 	 */
-	public static String agregarNuevoProfesor(Persona nuevaPer,String rutAdm) {
+	public static String agregarNuevoProfesor(Persona nuevaPer) {
 		try {
 			if (nuevaPer.validarAtributos()) {
 			// Se establece una condicion de busqueda
 				System.out.println("atributos validos");
 			String condicionPersona = "rut='" + nuevaPer.getRut() + "'";
-			String condicionAdm = "persona.rut='" + rutAdm + "'";
 		    // Se asigna a la variable lormPersonaBuscar, la persona con la condicion establecida
 			orm.Persona lormPersonaBuscar = orm.PersonaDAO.loadPersonaByQuery(condicionPersona, null);
-			orm.Jefeadministracion lormJefeadministracion = orm.JefeadministracionDAO.loadJefeadministracionByQuery(condicionAdm, null);
 			// Si la persona no existe
 			if (lormPersonaBuscar == null) {
 				System.out.println("la persona existe");
@@ -55,7 +53,6 @@ public class Profesor extends Persona {
 					orm.Sueldo_profesor lormSueldo_profesor = orm.Sueldo_profesorDAO.createSueldo_profesor();
 					lormSueldo_profesor.setSueldo(lormSueldo);
 					lormSueldo_profesor.setProfesor(lormProfesor);
-					lormSueldo_profesor.setJefeadministracion(lormJefeadministracion);
 					orm.Sueldo_profesorDAO.save(lormSueldo_profesor);
 					
 					// TODO Initialize the properties of the persistent object here, the following properties must be initialized before saving : sueldo_profesor, estadoPago, cantCursos, mes, monto
