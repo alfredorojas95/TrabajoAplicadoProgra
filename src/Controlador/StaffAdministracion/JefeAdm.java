@@ -31,13 +31,14 @@ public class JefeAdm extends Persona {
 					lormPersona.setNombre(nuevaPer.getNombre());
 					lormPersona.setApellido(nuevaPer.getApellido());
 					lormPersona.setRut(nuevaPer.getRut());
+					lormPersona.setPass(nuevaPer.getPass());
 					orm.PersonaDAO.save(lormPersona);
 				orm.Jefeadministracion lormJadm = orm.JefeadministracionDAO.createJefeadministracion();
 					lormJadm.setPersona(lormPersona);
 					orm.JefeadministracionDAO.save(lormJadm);
-					return "El Profesor ingresado exitosamente";
+					return "Jefe de administración ingresado exitosamente";
 				} else {
-					return "El Profesor ingresado ya existe";
+					return "El jefe de administración ingresado ya existe";
 				}
 			}else{
 				return "Atributo no valido";

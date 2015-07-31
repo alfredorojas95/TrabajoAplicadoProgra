@@ -18,7 +18,7 @@ public class Secretaria extends Persona {
 	 * 
 	 * @param NuevaPer
 	 */
-	public static String agregarNuevaSecretatia(Persona nuevaPersona) {
+	public static String agregarNuevaSecretaria(Persona nuevaPersona) {
 		try {
 			if (nuevaPersona.validarAtributos()) {
 				// Se establece una condicion de busqueda

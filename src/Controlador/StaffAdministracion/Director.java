@@ -32,11 +32,12 @@ public class Director extends Persona {
 					lormPersona.setNombre(nuevaPer.getNombre());
 					lormPersona.setApellido(nuevaPer.getApellido());
 					lormPersona.setRut(nuevaPer.getRut());
+					lormPersona.setPass(nuevaPer.getPass());
 					orm.PersonaDAO.save(lormPersona);
 					orm.Director lormDirector = orm.DirectorDAO.createDirector();
 					lormDirector.setPersona(lormPersona);
 					orm.DirectorDAO.save(lormDirector);
-					return "El director ingresado exitosamente";
+					return "Director ingresado exitosamente";
 				} else {
 					return "El director ingresado ya existe";
 				}

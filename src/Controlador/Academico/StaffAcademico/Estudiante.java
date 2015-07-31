@@ -49,6 +49,7 @@ public class Estudiante extends Persona {
 					lormPersona.setNombre(nuevaPersona.getNombre());
 					lormPersona.setApellido(nuevaPersona.getApellido());
 					lormPersona.setRut(nuevaPersona.getRut());
+					lormPersona.setPass(nuevaPersona.getPass());
 					orm.PersonaDAO.save(lormPersona);
 
 					// Crear un nuevo estudiante
