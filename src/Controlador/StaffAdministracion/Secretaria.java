@@ -3,7 +3,11 @@ package Controlador.StaffAdministracion;
 import org.orm.PersistentException;
 
 import Controlador.Persona.*;
-
+/**
+ * 
+ * @author Alfredo Rojas
+ *
+ */
 public class Secretaria extends Persona {
 
 	public Secretaria(String nombre, String apellido, String rut) {
@@ -15,38 +19,40 @@ public class Secretaria extends Persona {
 		super(nombre, apellido, rut, pass);
 	}
 	/**
-	 * 
-	 * @param NuevaPer
+	 *  este metodo agrega una nueva secretaria
+	 * @param nombre
+	 * @param apellido
+	 * @param rut
+	 * @param pass
+	 * @return String mensaje de confirmacion
 	 */
-	public static String agregarNuevaSecretaria(Persona nuevaPersona) {
+	public static String agregarNuevaSecretaria(String nombre, String apellido, String rut, String pass) {
+		Persona nuevaPersona = new Persona(nombre, apellido, rut, pass);
 		try {
 			if (nuevaPersona.validarAtributos()) {
-				// Se establece una condicion de busqueda
+				// Se busca la persona
 				String condicionPersona = "rut='" + nuevaPersona.getRut() + "'";
-				// Se asigna a la variable lormPersonaBuscar, la persona con la
-				// condicion establecida
-				orm.Persona lormPersonaBuscar = orm.PersonaDAO
-						.loadPersonaByQuery(condicionPersona, null);
-				// Si la persona no existe
+				orm.Persona lormPersonaBuscar = orm.PersonaDAO.loadPersonaByQuery(condicionPersona, null);
+				
+				// Si la persona no existe, se crea persona, se setean los valores y se gurda
+				//despues se crea la secretaria, se setea persona y se guarda
 				if (lormPersonaBuscar == null) {
-					// Crear nueva persona
+				
 					orm.Persona lormPersona = orm.PersonaDAO.createPersona();
-					// Enviar valores a persona encontrados en el objto Persona
-					// recibido por parametro.
+					
 					lormPersona.setNombre(nuevaPersona.getNombre());
 					lormPersona.setApellido(nuevaPersona.getApellido());
 					lormPersona.setRut(nuevaPersona.getRut());
-					// Guardar persona
+					lormPersona.setPass(nuevaPersona.getPass());
 					orm.PersonaDAO.save(lormPersona);
 
-					// Crear nueva secretaria
 					orm.Secretaria lormSecretaria = orm.SecretariaDAO.createSecretaria();
 					lormSecretaria.setPersona(lormPersona);
-					// Guardar secretaria
 					orm.SecretariaDAO.save(lormSecretaria);
 					return "Se ingreso nueva secretaria correctamente";
+					
 				} else {
-					return "La persona ya existe";
+					return "Esta persona ya existe";
 				}
 			} else {
 				return "Atributo no valido";

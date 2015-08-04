@@ -17,22 +17,28 @@ public class Sueldo {
 	public Sueldo() {
 	}
 	
-	private java.util.Set this_getSet (int key) {
-		if (key == orm.ORMConstants.KEY_SUELDO_SUELDO_PROFESOR) {
-			return ORM_sueldo_profesor;
+	private void this_setOwner(Object owner, int key) {
+		if (key == orm.ORMConstants.KEY_SUELDO_PROFESOR) {
+			this.profesor = (orm.Profesor) owner;
 		}
 		
-		return null;
+		else if (key == orm.ORMConstants.KEY_SUELDO_JEFEADMINISTRACION) {
+			this.jefeadministracion = (orm.Jefeadministracion) owner;
+		}
 	}
 	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
-		public java.util.Set getSet(int key) {
-			return this_getSet(key);
+		public void setOwner(Object owner, int key) {
+			this_setOwner(owner, key);
 		}
 		
 	};
 	
 	private int id;
+	
+	private orm.Jefeadministracion jefeadministracion;
+	
+	private orm.Profesor profesor;
 	
 	private int monto;
 	
@@ -41,8 +47,6 @@ public class Sueldo {
 	private int cantCursos;
 	
 	private int estadoPago;
-	
-	private java.util.Set ORM_sueldo_profesor = new java.util.HashSet();
 	
 	private void setId(int value) {
 		this.id = value;
@@ -88,15 +92,53 @@ public class Sueldo {
 		return estadoPago;
 	}
 	
-	private void setORM_Sueldo_profesor(java.util.Set value) {
-		this.ORM_sueldo_profesor = value;
+	public void setProfesor(orm.Profesor value) {
+		if (profesor != null) {
+			profesor.sueldo.remove(this);
+		}
+		if (value != null) {
+			value.sueldo.add(this);
+		}
 	}
 	
-	private java.util.Set getORM_Sueldo_profesor() {
-		return ORM_sueldo_profesor;
+	public orm.Profesor getProfesor() {
+		return profesor;
 	}
 	
-	public final orm.Sueldo_profesorSetCollection sueldo_profesor = new orm.Sueldo_profesorSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_SUELDO_SUELDO_PROFESOR, orm.ORMConstants.KEY_SUELDO_PROFESOR_SUELDO, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	/**
+	 * This method is for internal use only.
+	 */
+	public void setORM_Profesor(orm.Profesor value) {
+		this.profesor = value;
+	}
+	
+	private orm.Profesor getORM_Profesor() {
+		return profesor;
+	}
+	
+	public void setJefeadministracion(orm.Jefeadministracion value) {
+		if (jefeadministracion != null) {
+			jefeadministracion.sueldo.remove(this);
+		}
+		if (value != null) {
+			value.sueldo.add(this);
+		}
+	}
+	
+	public orm.Jefeadministracion getJefeadministracion() {
+		return jefeadministracion;
+	}
+	
+	/**
+	 * This method is for internal use only.
+	 */
+	public void setORM_Jefeadministracion(orm.Jefeadministracion value) {
+		this.jefeadministracion = value;
+	}
+	
+	private orm.Jefeadministracion getORM_Jefeadministracion() {
+		return jefeadministracion;
+	}
 	
 	public String toString() {
 		return String.valueOf(getId());

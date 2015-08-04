@@ -1,18 +1,29 @@
 package Controlador.Reporte;
 
 import org.orm.PersistentException;
-
+/**
+ * 
+ * @author Alfredo Rojas
+ *
+ */
 public class Reporte {
 
-	private static final int ROW_COUNT = 100;
-	
-	public static int[] balanceMen(){
+	//private static final int ROW_COUNT = 100;
+
+	/**
+	 * este metodo calcula los ingresos de mensualidad por mes
+	 * @return int[] con los valores de los 10 meses
+	 */
+	public static int[] balanceMensualidad(){
 		int[] mes= new int[10];
 		try {
-			 //se crea un arreglo orm.mensualidad
+			//se buscan todas la mensualidades y se almacenan
 			orm.Mensualidad[] ormMensualidads = orm.MensualidadDAO.listMensualidadByQuery(null, null);
-			int length = Math.min(ormMensualidads.length, ROW_COUNT);
-			//se recorre el arreglo
+			
+			//int length = Math.min(ormMensualidads.length, ROW_COUNT);
+			int length = ormMensualidads.length;
+			
+			//se recorren todas la mensalidades y se guardan los montos dependiendo el mes
 			for (int i = 0; i < length; i++) {
 				// se asigna a cadda mes su total correspondiente
 				if(ormMensualidads[i].getMes()==1 ){
@@ -35,29 +46,32 @@ public class Reporte {
 					mes[8]= mes[8]+ormMensualidads[i].getMonto();
 				}if(ormMensualidads[i].getMes()==10){
 					mes[9]= mes[9]+ormMensualidads[i].getMonto();
-				}
-				
-			}
-				
+				}	
+			}		
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return mes;
-		
-		
+		return mes;		
 	}
 	
-	public static int balanceMat(){
-		int totalM=0;
+	/**
+	 * este metodo calcula el monto de todas las matriculas pagadas
+	 * @return int con el monto de ingreso por matricula
+	 */ 
+	public static int balanceMatricula(){
+		int totalMatricula=0;
 		try {
-			// crea un arreglo de orm.Matriculas
+			// se buscan todas la matriculas 
 			orm.Matricula[] ormMatriculas = orm.MatriculaDAO.listMatriculaByQuery(null, null);
-			int length = Math.min(ormMatriculas.length, ROW_COUNT);
-			for (int i = 0; i < length; i++) {
-				// si las matriculas se encuentran pagadas se sumara al total 
+			
+			//int length = Math.min(ormMatriculas.length, ROW_COUNT);
+			int length = ormMatriculas.length;
+			//se recorren todas las matriculas y si la matricula tiene el estado pagado = 1
+			//se le suma a la variable totalMatricula
+			for (int i = 0; i < length; i++) { 
 				if(ormMatriculas[i].getEstadoMatricula()==1){
-					totalM= totalM+ormMatriculas[i].getMonto();
+					totalMatricula= totalMatricula+ormMatriculas[i].getMonto();
 				}
 			}
 				
@@ -65,21 +79,30 @@ public class Reporte {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return totalM;
+		return totalMatricula;
 		
 		
 	}
 	
-	public static int[] balanceSueldo() {
+	/**
+	 * este metodo guarda los todos los sueldos que se le pagaron
+	 *  a los profesores por mes.
+	 * @return int[] montos de los sueldos por meses
+	 */
+	public static int[] balanceSueldoProfes() {
 		int[] mes = new int[10];
 		try {
-			// se crea un arreglo orm Sueldo
+			// se buscan todos los sueldos
 			orm.Sueldo[] ormSueldos = orm.SueldoDAO.listSueldoByQuery(null, null);
-			int length = Math.min(ormSueldos.length, ROW_COUNT);
-			System.out.println("hasdasd");
+			
+			//int length = Math.min(ormSueldos.length, ROW_COUNT);
+			int length =ormSueldos.length;
+			
+			//se recorren los sueldos, se suman los motos por meses
+			// y se guardan en el arreglo
 			for (int i = 0; i < length; i++) {
 				
-				// recorre y guarda los datos en un arreglo de total por mes
+				// se identfica el mes para sumar los montos
 				if (ormSueldos[i].getMes() == 1) {
 					mes[0] = mes[0] + ormSueldos[i].getMonto();
 				}
@@ -120,42 +143,34 @@ public class Reporte {
 
 	}
 	
+	/**
+	 * este metodo calcula el balance de los ingresos de matricula, mensualidad
+	 * y le resta los montos de los sueldos pagados a los profesores
+	 * @return String[][]
+	 */
 	public static String[][] obtenerBalanceIngGasto() {
-		int totalM=0;
-		int[] balanceS=balanceSueldo();
-		int[] balanceM=balanceMen();
-		totalM=balanceMat();
-		//creacion de matriz
+		int totalIngresoMatricula=0;
+		
+		int[] balanceSueldo=balanceSueldoProfes();//se obtienen los sueldos pagados a los profesores
+		int[] balanceMensualidad=balanceMensualidad();//se obtienen los montos de mensualidad
+		totalIngresoMatricula=balanceMatricula();//int, se obtienen los montos de matricla
+		
+		//se crea la matriz de 10 meses y 3 valores por mes
 		String[][] matrizBalance= new String[10][3];
 		for (int i = 0; i < matrizBalance.length; i++) {  //número de filas
-		     for (int j = 0; j < matrizBalance[i].length; j++) { //número de columnas de cada fila
-		         //se guardan los datos correspondiente a los ingrso y gasto en su posicion 
-		    	int suma= balanceM[i]+totalM;
-		    	 matrizBalance[i][0]=""+(suma);
-		          matrizBalance[i][1]=""+(balanceS[i]+0);
-		          matrizBalance[i][2]=""+(suma-balanceS[i]);
+		     for (int j = 0; j < matrizBalance[i].length; j++) { //número de columnas
+		        
+		    	//guarda en ingreso, gasto y total por meses
+		    	int totalIngreso= balanceMensualidad[i]+totalIngresoMatricula;//al primer mes se le suma el monto de matricula
+		    	matrizBalance[i][0]=""+(totalIngreso);//ingreso por mes (mes + matricula)
+		        matrizBalance[i][1]=""+(balanceSueldo[i]);//gasto por mes (sueldo por mes)
+		        matrizBalance[i][2]=""+(totalIngreso-balanceSueldo[i]);//ingreso-gasto por mes
 		            
 		     }
-		     totalM=totalM-totalM;
+		     totalIngresoMatricula=0;
 		     System.out.println(matrizBalance[i][0]+" y "+matrizBalance[i][1] +" y "+matrizBalance[i][2]);
 		}
 		return matrizBalance;
-		
-	}
-	
-	public static orm.Sueldo_profesor[] balanceSueldoProf(){
-		orm.Sueldo_profesor[] ormSueldo_profesors=null;
-		try {
-			ormSueldo_profesors = orm.Sueldo_profesorDAO.listSueldo_profesorByQuery(null, null);
-			int length = Math.min(ormSueldo_profesors.length, ROW_COUNT);
-		} catch (PersistentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-		
-		return ormSueldo_profesors;
 		
 	}
 

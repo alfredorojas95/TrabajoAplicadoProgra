@@ -73,6 +73,7 @@ public class MensualidadSetCollection extends org.orm.util.ORMSet {
 	 * <li>id</li>
 	 * <li>mes</li>
 	 * <li>monto</li>
+	 * <li>cantCursos</li>
 	 * </ul>
 	 * @return The persistent objects sorted array
 	 */
@@ -86,6 +87,7 @@ public class MensualidadSetCollection extends org.orm.util.ORMSet {
 	 * <li>id</li>
 	 * <li>mes</li>
 	 * <li>monto</li>
+	 * <li>cantCursos</li>
 	 * </ul>
 	 * @param ascending true for ascending, false for descending
 	 * @return The persistent objects sorted array

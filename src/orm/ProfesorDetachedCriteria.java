@@ -22,16 +22,16 @@ public class ProfesorDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression id;
 	public final IntegerExpression personaId;
 	public final AssociationExpression persona;
-	public final CollectionExpression sueldo_profesor;
 	public final CollectionExpression curso_profesor;
+	public final CollectionExpression sueldo;
 	
 	public ProfesorDetachedCriteria() {
 		super(orm.Profesor.class, orm.ProfesorCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
 		personaId = new IntegerExpression("persona.id", this.getDetachedCriteria());
 		persona = new AssociationExpression("persona", this.getDetachedCriteria());
-		sueldo_profesor = new CollectionExpression("ORM_Sueldo_profesor", this.getDetachedCriteria());
 		curso_profesor = new CollectionExpression("ORM_Curso_profesor", this.getDetachedCriteria());
+		sueldo = new CollectionExpression("ORM_Sueldo", this.getDetachedCriteria());
 	}
 	
 	public ProfesorDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -39,20 +39,20 @@ public class ProfesorDetachedCriteria extends AbstractORMDetachedCriteria {
 		id = new IntegerExpression("id", this.getDetachedCriteria());
 		personaId = new IntegerExpression("persona.id", this.getDetachedCriteria());
 		persona = new AssociationExpression("persona", this.getDetachedCriteria());
-		sueldo_profesor = new CollectionExpression("ORM_Sueldo_profesor", this.getDetachedCriteria());
 		curso_profesor = new CollectionExpression("ORM_Curso_profesor", this.getDetachedCriteria());
+		sueldo = new CollectionExpression("ORM_Sueldo", this.getDetachedCriteria());
 	}
 	
 	public PersonaDetachedCriteria createPersonaCriteria() {
 		return new PersonaDetachedCriteria(createCriteria("persona"));
 	}
 	
-	public Sueldo_profesorDetachedCriteria createSueldo_profesorCriteria() {
-		return new Sueldo_profesorDetachedCriteria(createCriteria("ORM_Sueldo_profesor"));
-	}
-	
 	public Curso_profesorDetachedCriteria createCurso_profesorCriteria() {
 		return new Curso_profesorDetachedCriteria(createCriteria("ORM_Curso_profesor"));
+	}
+	
+	public SueldoDetachedCriteria createSueldoCriteria() {
+		return new SueldoDetachedCriteria(createCriteria("ORM_Sueldo"));
 	}
 	
 	public Profesor uniqueProfesor(PersistentSession session) {

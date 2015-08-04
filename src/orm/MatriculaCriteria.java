@@ -20,22 +20,22 @@ import org.orm.criteria.*;
 
 public class MatriculaCriteria extends AbstractORMCriteria {
 	public final IntegerExpression id;
-	public final IntegerExpression estadoMatricula;
-	public final IntegerExpression monto;
 	public final IntegerExpression secretariaId;
 	public final AssociationExpression secretaria;
 	public final IntegerExpression estudianteId;
 	public final AssociationExpression estudiante;
+	public final IntegerExpression estadoMatricula;
+	public final IntegerExpression monto;
 	
 	public MatriculaCriteria(Criteria criteria) {
 		super(criteria);
 		id = new IntegerExpression("id", this);
-		estadoMatricula = new IntegerExpression("estadoMatricula", this);
-		monto = new IntegerExpression("monto", this);
 		secretariaId = new IntegerExpression("secretaria.id", this);
 		secretaria = new AssociationExpression("secretaria", this);
 		estudianteId = new IntegerExpression("estudiante.id", this);
 		estudiante = new AssociationExpression("estudiante", this);
+		estadoMatricula = new IntegerExpression("estadoMatricula", this);
+		monto = new IntegerExpression("monto", this);
 	}
 	
 	public MatriculaCriteria(PersistentSession session) {

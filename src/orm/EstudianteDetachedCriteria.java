@@ -22,6 +22,8 @@ public class EstudianteDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression id;
 	public final IntegerExpression personaId;
 	public final AssociationExpression persona;
+	public final IntegerExpression apoderadoId;
+	public final AssociationExpression apoderado;
 	public final CollectionExpression estudiante_curso;
 	public final IntegerExpression matriculaId;
 	public final AssociationExpression matricula;
@@ -32,6 +34,8 @@ public class EstudianteDetachedCriteria extends AbstractORMDetachedCriteria {
 		id = new IntegerExpression("id", this.getDetachedCriteria());
 		personaId = new IntegerExpression("persona.id", this.getDetachedCriteria());
 		persona = new AssociationExpression("persona", this.getDetachedCriteria());
+		apoderadoId = new IntegerExpression("apoderado.id", this.getDetachedCriteria());
+		apoderado = new AssociationExpression("apoderado", this.getDetachedCriteria());
 		estudiante_curso = new CollectionExpression("ORM_Estudiante_curso", this.getDetachedCriteria());
 		matriculaId = new IntegerExpression("matricula.id", this.getDetachedCriteria());
 		matricula = new AssociationExpression("matricula", this.getDetachedCriteria());
@@ -43,6 +47,8 @@ public class EstudianteDetachedCriteria extends AbstractORMDetachedCriteria {
 		id = new IntegerExpression("id", this.getDetachedCriteria());
 		personaId = new IntegerExpression("persona.id", this.getDetachedCriteria());
 		persona = new AssociationExpression("persona", this.getDetachedCriteria());
+		apoderadoId = new IntegerExpression("apoderado.id", this.getDetachedCriteria());
+		apoderado = new AssociationExpression("apoderado", this.getDetachedCriteria());
 		estudiante_curso = new CollectionExpression("ORM_Estudiante_curso", this.getDetachedCriteria());
 		matriculaId = new IntegerExpression("matricula.id", this.getDetachedCriteria());
 		matricula = new AssociationExpression("matricula", this.getDetachedCriteria());
@@ -51,6 +57,10 @@ public class EstudianteDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public PersonaDetachedCriteria createPersonaCriteria() {
 		return new PersonaDetachedCriteria(createCriteria("persona"));
+	}
+	
+	public ApoderadoDetachedCriteria createApoderadoCriteria() {
+		return new ApoderadoDetachedCriteria(createCriteria("apoderado"));
 	}
 	
 	public Estudiante_cursoDetachedCriteria createEstudiante_cursoCriteria() {

@@ -25,7 +25,7 @@ public class CrearSecretariaTest {
 		 * prueba en donde se ingresa exitosamente una nueva secretaria a la base de datos
 		 */
 		String resultado="";
-		resultado =Secretaria.agregarNuevaSecretaria(new Persona("Denis","Lopez","165643214","1234"));
+		resultado =Secretaria.agregarNuevaSecretaria("Juanita","Ringeling","165643214","123456");
 		assertTrue(resultado=="Se ingreso nueva secretaria correctamente");
 		
 		/*

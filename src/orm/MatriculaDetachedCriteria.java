@@ -20,33 +20,33 @@ import org.orm.criteria.*;
 
 public class MatriculaDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression id;
-	public final IntegerExpression estadoMatricula;
-	public final IntegerExpression monto;
 	public final IntegerExpression secretariaId;
 	public final AssociationExpression secretaria;
 	public final IntegerExpression estudianteId;
 	public final AssociationExpression estudiante;
+	public final IntegerExpression estadoMatricula;
+	public final IntegerExpression monto;
 	
 	public MatriculaDetachedCriteria() {
 		super(orm.Matricula.class, orm.MatriculaCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
-		estadoMatricula = new IntegerExpression("estadoMatricula", this.getDetachedCriteria());
-		monto = new IntegerExpression("monto", this.getDetachedCriteria());
 		secretariaId = new IntegerExpression("secretaria.id", this.getDetachedCriteria());
 		secretaria = new AssociationExpression("secretaria", this.getDetachedCriteria());
 		estudianteId = new IntegerExpression("estudiante.id", this.getDetachedCriteria());
 		estudiante = new AssociationExpression("estudiante", this.getDetachedCriteria());
+		estadoMatricula = new IntegerExpression("estadoMatricula", this.getDetachedCriteria());
+		monto = new IntegerExpression("monto", this.getDetachedCriteria());
 	}
 	
 	public MatriculaDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, orm.MatriculaCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
-		estadoMatricula = new IntegerExpression("estadoMatricula", this.getDetachedCriteria());
-		monto = new IntegerExpression("monto", this.getDetachedCriteria());
 		secretariaId = new IntegerExpression("secretaria.id", this.getDetachedCriteria());
 		secretaria = new AssociationExpression("secretaria", this.getDetachedCriteria());
 		estudianteId = new IntegerExpression("estudiante.id", this.getDetachedCriteria());
 		estudiante = new AssociationExpression("estudiante", this.getDetachedCriteria());
+		estadoMatricula = new IntegerExpression("estadoMatricula", this.getDetachedCriteria());
+		monto = new IntegerExpression("monto", this.getDetachedCriteria());
 	}
 	
 	public SecretariaDetachedCriteria createSecretariaCriteria() {

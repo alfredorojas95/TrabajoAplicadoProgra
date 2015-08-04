@@ -44,6 +44,8 @@ public class Mensualidad {
 	
 	private int monto;
 	
+	private Integer cantCursos;
+	
 	private void setId(int value) {
 		this.id = value;
 	}
@@ -70,6 +72,18 @@ public class Mensualidad {
 	
 	public int getMonto() {
 		return monto;
+	}
+	
+	public void setCantCursos(int value) {
+		setCantCursos(new Integer(value));
+	}
+	
+	public void setCantCursos(Integer value) {
+		this.cantCursos = value;
+	}
+	
+	public Integer getCantCursos() {
+		return cantCursos;
 	}
 	
 	public void setSecretaria(orm.Secretaria value) {

@@ -1,5 +1,10 @@
 package Controlador.Persona;
 
+/**
+ * 
+ * @author Alfredo Rojas
+ *
+ */
 public class Persona {
 
 	private String nombre;
@@ -22,7 +27,10 @@ public class Persona {
 		this.pass=pass;
 	}
 	
-	
+	/**
+	 * 
+	 * @return
+	 */
 	public String getNombre() {
 		return this.nombre;
 	}
@@ -35,6 +43,10 @@ public class Persona {
 		this.nombre = nombre;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getApellido() {
 		return this.apellido;
 	}
@@ -59,6 +71,10 @@ public class Persona {
 		this.rut = rut;
 	}
 	
+	/**
+	 * este método valida que los métodos validar rut, validaSoloLetras y validarPass sean "true"
+	 * @return boolean 
+	 */
 	public boolean validarAtributos() {
 		/*
 		 * Si nombre y apellido son menores e iguales que 20, nombre y apellido
@@ -75,14 +91,14 @@ public class Persona {
 	}
 
 	/**
-	 * Metodo que valida que el rut este compuesto de 9 numeros
+	 * Metodo que valida que la cantidad de dígitos del rut sea manor o igual a 9
 	 * 
-	 * @return booleano con el resultado de la operacion
+	 * @return boolean con el resultado de la operacion
 	 */
 	public boolean validarRut() {
 		// Si el parametro ingresado se compone de numeros y su largo es 9, se
 		// retorna true
-		if (this.rut.matches("\\d*") == true && this.rut.length() == 9) {
+		if (this.rut.matches("\\d*") == true && this.rut.length() <= 9) {
 			return true;
 		} else {
 			return false;
@@ -92,10 +108,8 @@ public class Persona {
 	/**
 	 * Metodo que valida que una cadena ingresada por parametro se componga de
 	 * solo letras
-	 * 
-	 * @param cedena
-	 *            de texto
-	 * @return booleano con el resultado de la operacion
+	 * @param cedena de texto
+	 * @return boolean con el resultado de la operacion
 	 */
 	public boolean validarSoloLetras(String cedena) {
 		// Si la cadena se compone de solo letras, se retorna true
@@ -106,18 +120,30 @@ public class Persona {
 		}
 	}
 	
+	/**
+	 * este método valida que la contraseña tenga mínimo 6 caracteres y máximo 15
+	 * @return boolean 
+	 */
 	public boolean validarPass(){
-		if (this.rut.length() > 5 && this.rut.length()<=15) {
+		if (this.pass.length() > 5 && this.pass.length()<=15) {
 			return true;
 		} else {
 			return false;
 		}
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getPass() {
 		return pass;
 	}
 
+	/**
+	 * 
+	 * @param pass
+	 */
 	public void setPass(String pass) {
 		this.pass = pass;
 	}

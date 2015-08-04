@@ -327,6 +327,10 @@ public class CursoDAO {
 				curso.getDirector().curso.remove(curso);
 			}
 			
+			if(curso.getJefeadministracion() != null) {
+				curso.getJefeadministracion().curso.remove(curso);
+			}
+			
 			orm.Curso_profesor[] lCurso_profesors = curso.curso_profesor.toArray();
 			for(int i = 0; i < lCurso_profesors.length; i++) {
 				lCurso_profesors[i].setCurso(null);
@@ -347,6 +351,10 @@ public class CursoDAO {
 		try {
 			if(curso.getDirector() != null) {
 				curso.getDirector().curso.remove(curso);
+			}
+			
+			if(curso.getJefeadministracion() != null) {
+				curso.getJefeadministracion().curso.remove(curso);
 			}
 			
 			orm.Curso_profesor[] lCurso_profesors = curso.curso_profesor.toArray();

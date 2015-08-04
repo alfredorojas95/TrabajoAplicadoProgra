@@ -36,7 +36,7 @@ public class CrearProfesorTest {
 		 * prueba unitaria con rut nuevo
 		 */
 		String resultado="";
-		resultado =Profesor.agregarNuevoProfesor(new Persona("Marcos","Concha","145657474","1234"));
+		resultado =Profesor.agregarNuevoProfesor("Marcos","Concha","137657474","123456");
 		assertTrue(resultado=="Profesor ingresado exitosamente");
 		
 		/*

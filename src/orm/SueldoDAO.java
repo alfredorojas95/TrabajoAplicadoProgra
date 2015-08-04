@@ -323,10 +323,14 @@ public class SueldoDAO {
 	
 	public static boolean deleteAndDissociate(orm.Sueldo sueldo)throws PersistentException {
 		try {
-			orm.Sueldo_profesor[] lSueldo_profesors = sueldo.sueldo_profesor.toArray();
-			for(int i = 0; i < lSueldo_profesors.length; i++) {
-				lSueldo_profesors[i].setSueldo(null);
+			if(sueldo.getJefeadministracion() != null) {
+				sueldo.getJefeadministracion().sueldo.remove(sueldo);
 			}
+			
+			if(sueldo.getProfesor() != null) {
+				sueldo.getProfesor().sueldo.remove(sueldo);
+			}
+			
 			return delete(sueldo);
 		}
 		catch(Exception e) {
@@ -337,10 +341,14 @@ public class SueldoDAO {
 	
 	public static boolean deleteAndDissociate(orm.Sueldo sueldo, org.orm.PersistentSession session)throws PersistentException {
 		try {
-			orm.Sueldo_profesor[] lSueldo_profesors = sueldo.sueldo_profesor.toArray();
-			for(int i = 0; i < lSueldo_profesors.length; i++) {
-				lSueldo_profesors[i].setSueldo(null);
+			if(sueldo.getJefeadministracion() != null) {
+				sueldo.getJefeadministracion().sueldo.remove(sueldo);
 			}
+			
+			if(sueldo.getProfesor() != null) {
+				sueldo.getProfesor().sueldo.remove(sueldo);
+			}
+			
 			try {
 				session.delete(sueldo);
 				return true;

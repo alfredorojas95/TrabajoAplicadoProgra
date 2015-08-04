@@ -16,5 +16,6 @@ License Type: Academic
 		</many-to-one>
 		<property name="mes" column="mes" type="integer" length="2" not-null="true" lazy="false"/>
 		<property name="monto" column="monto" type="integer" length="10" not-null="true" lazy="false"/>
+		<property name="cantCursos" column="cantCursos" type="integer" length="2" not-null="false" lazy="false"/>
 	</class>
 </hibernate-mapping>

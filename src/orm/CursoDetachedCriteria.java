@@ -20,10 +20,12 @@ import org.orm.criteria.*;
 
 public class CursoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression id;
-	public final StringExpression nombreCurso;
-	public final IntegerExpression estadocurso;
 	public final IntegerExpression directorId;
 	public final AssociationExpression director;
+	public final IntegerExpression jefeadministracionId;
+	public final AssociationExpression jefeadministracion;
+	public final StringExpression nombreCurso;
+	public final IntegerExpression estadocurso;
 	public final IntegerExpression cupos;
 	public final CollectionExpression curso_profesor;
 	public final CollectionExpression estudiante_curso;
@@ -31,10 +33,12 @@ public class CursoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public CursoDetachedCriteria() {
 		super(orm.Curso.class, orm.CursoCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
-		nombreCurso = new StringExpression("nombreCurso", this.getDetachedCriteria());
-		estadocurso = new IntegerExpression("estadocurso", this.getDetachedCriteria());
 		directorId = new IntegerExpression("director.id", this.getDetachedCriteria());
 		director = new AssociationExpression("director", this.getDetachedCriteria());
+		jefeadministracionId = new IntegerExpression("jefeadministracion.id", this.getDetachedCriteria());
+		jefeadministracion = new AssociationExpression("jefeadministracion", this.getDetachedCriteria());
+		nombreCurso = new StringExpression("nombreCurso", this.getDetachedCriteria());
+		estadocurso = new IntegerExpression("estadocurso", this.getDetachedCriteria());
 		cupos = new IntegerExpression("cupos", this.getDetachedCriteria());
 		curso_profesor = new CollectionExpression("ORM_Curso_profesor", this.getDetachedCriteria());
 		estudiante_curso = new CollectionExpression("ORM_Estudiante_curso", this.getDetachedCriteria());
@@ -43,10 +47,12 @@ public class CursoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public CursoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, orm.CursoCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
-		nombreCurso = new StringExpression("nombreCurso", this.getDetachedCriteria());
-		estadocurso = new IntegerExpression("estadocurso", this.getDetachedCriteria());
 		directorId = new IntegerExpression("director.id", this.getDetachedCriteria());
 		director = new AssociationExpression("director", this.getDetachedCriteria());
+		jefeadministracionId = new IntegerExpression("jefeadministracion.id", this.getDetachedCriteria());
+		jefeadministracion = new AssociationExpression("jefeadministracion", this.getDetachedCriteria());
+		nombreCurso = new StringExpression("nombreCurso", this.getDetachedCriteria());
+		estadocurso = new IntegerExpression("estadocurso", this.getDetachedCriteria());
 		cupos = new IntegerExpression("cupos", this.getDetachedCriteria());
 		curso_profesor = new CollectionExpression("ORM_Curso_profesor", this.getDetachedCriteria());
 		estudiante_curso = new CollectionExpression("ORM_Estudiante_curso", this.getDetachedCriteria());
@@ -54,6 +60,10 @@ public class CursoDetachedCriteria extends AbstractORMDetachedCriteria {
 	
 	public DirectorDetachedCriteria createDirectorCriteria() {
 		return new DirectorDetachedCriteria(createCriteria("director"));
+	}
+	
+	public JefeadministracionDetachedCriteria createJefeadministracionCriteria() {
+		return new JefeadministracionDetachedCriteria(createCriteria("jefeadministracion"));
 	}
 	
 	public Curso_profesorDetachedCriteria createCurso_profesorCriteria() {

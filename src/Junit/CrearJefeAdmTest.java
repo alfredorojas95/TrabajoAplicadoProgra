@@ -25,7 +25,7 @@ public class CrearJefeAdmTest {
 		 * prueba para agregar un Jefe de Administración a la base de datos
 		 */	
 		String resultado="";
-		resultado =JefeAdm.agregarNuevoJefeAdm(new Persona("Carlos","Venegas","135749802","1234"));
+		resultado =JefeAdm.agregarNuevoJefeAdm("Carlos","Venegas","135749802","123456");
 		assertTrue(resultado=="Jefe de administración ingresado exitosamente");
 		
 //		

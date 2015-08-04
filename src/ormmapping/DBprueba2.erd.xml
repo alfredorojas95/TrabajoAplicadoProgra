@@ -83,27 +83,14 @@
       <UserTypes/>
     </Column>
   </Entity>
-  <Entity name="sueldo_profesor">
-    <Column name="sueldoid">
+  <Entity name="sueldo">
+    <Column name="id">
       <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>sueldo.id</ReferencedColumn>
+      <ForeignKey>false</ForeignKey>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
-      <IDGenerator>assigned</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="profesorid">
-      <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>profesor.id</ReferencedColumn>
-      <Type>9</Type>
-      <Length>10</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>assigned</IDGenerator>
+      <IDGenerator>increment</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -120,15 +107,14 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-  </Entity>
-  <Entity name="sueldo">
-    <Column name="id">
-      <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
+    <Column name="profesorid">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>profesor.id</ReferencedColumn>
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
-      <IDGenerator>increment</IDGenerator>
+      <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -277,6 +263,30 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="directorid">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>director.id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="jefeadministracionid">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>jefeadministracion.id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
     <Column name="nombreCurso">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>false</ForeignKey>
@@ -294,18 +304,6 @@
       <Type>9</Type>
       <Length>1</Length>
       <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="directorid">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>true</ForeignKey>
-      <ReferencedColumn>director.id</ReferencedColumn>
-      <Type>9</Type>
-      <Length>10</Length>
-      <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -406,6 +404,18 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="apoderadoid">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>true</ForeignKey>
+      <ReferencedColumn>apoderado.id</ReferencedColumn>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
   </Entity>
   <Entity name="secretaria">
     <Column name="id">
@@ -444,28 +454,6 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
-    <Column name="estadoMatricula">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>1</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="monto">
-      <PrimaryKey>false</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>10</Length>
-      <Nullable>true</Nullable>
-      <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
     <Column name="secretariaid">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
@@ -485,6 +473,28 @@
       <Type>9</Type>
       <Length>10</Length>
       <Nullable>false</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="estadoMatricula">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>1</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
+    <Column name="monto">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>true</Nullable>
       <IDGenerator>native</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
@@ -549,8 +559,30 @@
       <Index>false</Index>
       <UserTypes/>
     </Column>
+    <Column name="cantCursos">
+      <PrimaryKey>false</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>2</Length>
+      <Nullable>true</Nullable>
+      <IDGenerator>native</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
   </Entity>
   <Entity name="apoderado">
+    <Column name="id">
+      <PrimaryKey>true</PrimaryKey>
+      <ForeignKey>false</ForeignKey>
+      <Type>9</Type>
+      <Length>10</Length>
+      <Nullable>false</Nullable>
+      <IDGenerator>increment</IDGenerator>
+      <Unique>false</Unique>
+      <Index>false</Index>
+      <UserTypes/>
+    </Column>
     <Column name="personaid">
       <PrimaryKey>false</PrimaryKey>
       <ForeignKey>true</ForeignKey>
@@ -559,17 +591,6 @@
       <Length>10</Length>
       <Nullable>false</Nullable>
       <IDGenerator>native</IDGenerator>
-      <Unique>false</Unique>
-      <Index>false</Index>
-      <UserTypes/>
-    </Column>
-    <Column name="id">
-      <PrimaryKey>true</PrimaryKey>
-      <ForeignKey>false</ForeignKey>
-      <Type>9</Type>
-      <Length>10</Length>
-      <Nullable>false</Nullable>
-      <IDGenerator>increment</IDGenerator>
       <Unique>false</Unique>
       <Index>false</Index>
       <UserTypes/>
@@ -585,41 +606,11 @@
       <Column>id</Column>
     </RefColumns>
   </ForeignKey>
-  <ForeignKey name="FKsueldo_pro922864">
-    <ReferenceTable>sueldo_profesor</ReferenceTable>
-    <ReferencedTable>sueldo</ReferencedTable>
-    <Columns>
-      <Column>sueldoid</Column>
-    </Columns>
-    <RefColumns>
-      <Column>id</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKsueldo_pro775409">
-    <ReferenceTable>sueldo_profesor</ReferenceTable>
-    <ReferencedTable>profesor</ReferencedTable>
-    <Columns>
-      <Column>profesorid</Column>
-    </Columns>
-    <RefColumns>
-      <Column>id</Column>
-    </RefColumns>
-  </ForeignKey>
   <ForeignKey name="FKprofesor625155">
     <ReferenceTable>profesor</ReferenceTable>
     <ReferencedTable>persona</ReferencedTable>
     <Columns>
       <Column>personaid</Column>
-    </Columns>
-    <RefColumns>
-      <Column>id</Column>
-    </RefColumns>
-  </ForeignKey>
-  <ForeignKey name="FKsueldo_pro509737">
-    <ReferenceTable>sueldo_profesor</ReferenceTable>
-    <ReferencedTable>jefeadministracion</ReferencedTable>
-    <Columns>
-      <Column>jefeadministracionid</Column>
     </Columns>
     <RefColumns>
       <Column>id</Column>
@@ -750,6 +741,46 @@
     <ReferencedTable>persona</ReferencedTable>
     <Columns>
       <Column>personaid</Column>
+    </Columns>
+    <RefColumns>
+      <Column>id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKestudiante428620">
+    <ReferenceTable>estudiante</ReferenceTable>
+    <ReferencedTable>apoderado</ReferencedTable>
+    <Columns>
+      <Column>apoderadoid</Column>
+    </Columns>
+    <RefColumns>
+      <Column>id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKcurso32628">
+    <ReferenceTable>curso</ReferenceTable>
+    <ReferencedTable>jefeadministracion</ReferencedTable>
+    <Columns>
+      <Column>jefeadministracionid</Column>
+    </Columns>
+    <RefColumns>
+      <Column>id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKsueldo777092">
+    <ReferenceTable>sueldo</ReferenceTable>
+    <ReferencedTable>profesor</ReferencedTable>
+    <Columns>
+      <Column>profesorid</Column>
+    </Columns>
+    <RefColumns>
+      <Column>id</Column>
+    </RefColumns>
+  </ForeignKey>
+  <ForeignKey name="FKsueldo508054">
+    <ReferenceTable>sueldo</ReferenceTable>
+    <ReferencedTable>jefeadministracion</ReferencedTable>
+    <Columns>
+      <Column>jefeadministracionid</Column>
     </Columns>
     <RefColumns>
       <Column>id</Column>

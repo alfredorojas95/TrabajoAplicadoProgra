@@ -25,14 +25,6 @@ public class ListDBprueba2Data {
 		}
 		System.out.println(length + " record(s) retrieved.");
 		
-		System.out.println("Listing Sueldo_profesor...");
-		orm.Sueldo_profesor[] ormSueldo_profesors = orm.Sueldo_profesorDAO.listSueldo_profesorByQuery(null, null);
-		length = Math.min(ormSueldo_profesors.length, ROW_COUNT);
-		for (int i = 0; i < length; i++) {
-			System.out.println(ormSueldo_profesors[i]);
-		}
-		System.out.println(length + " record(s) retrieved.");
-		
 		System.out.println("Listing Sueldo...");
 		orm.Sueldo[] ormSueldos = orm.SueldoDAO.listSueldoByQuery(null, null);
 		length = Math.min(ormSueldos.length, ROW_COUNT);
@@ -147,21 +139,6 @@ public class ListDBprueba2Data {
 			 System.out.println(ormPersonas[i]);
 		}
 		System.out.println(length + " Persona record(s) retrieved."); 
-		
-		System.out.println("Listing Sueldo_profesor by Criteria...");
-		orm.Sueldo_profesorCriteria lormSueldo_profesorCriteria = new orm.Sueldo_profesorCriteria();
-		// Please uncomment the follow line and fill in parameter(s) 
-		//orm.SueldoCriteria lormSueldo_profesorCriteria_Sueldo = lormSueldo_profesorCriteria.createSueldoCriteria();
-		//lormSueldo_profesorCriteria_Sueldo.id.eq();
-		//orm.ProfesorCriteria lormSueldo_profesorCriteria_Profesor = lormSueldo_profesorCriteria.createProfesorCriteria();
-		//lormSueldo_profesorCriteria_Profesor.id.eq();
-		lormSueldo_profesorCriteria.setMaxResults(ROW_COUNT);
-		orm.Sueldo_profesor[] ormSueldo_profesors = lormSueldo_profesorCriteria.listSueldo_profesor();
-		length =ormSueldo_profesors== null ? 0 : Math.min(ormSueldo_profesors.length, ROW_COUNT); 
-		for (int i = 0; i < length; i++) {
-			 System.out.println(ormSueldo_profesors[i]);
-		}
-		System.out.println(length + " Sueldo_profesor record(s) retrieved."); 
 		
 		System.out.println("Listing Sueldo by Criteria...");
 		orm.SueldoCriteria lormSueldoCriteria = new orm.SueldoCriteria();

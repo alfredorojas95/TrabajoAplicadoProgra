@@ -327,6 +327,10 @@ public class ApoderadoDAO {
 				apoderado.getPersona().setApoderado(null);
 			}
 			
+			orm.Estudiante[] lEstudiantes = apoderado.estudiante.toArray();
+			for(int i = 0; i < lEstudiantes.length; i++) {
+				lEstudiantes[i].setApoderado(null);
+			}
 			return delete(apoderado);
 		}
 		catch(Exception e) {
@@ -341,6 +345,10 @@ public class ApoderadoDAO {
 				apoderado.getPersona().setApoderado(null);
 			}
 			
+			orm.Estudiante[] lEstudiantes = apoderado.estudiante.toArray();
+			for(int i = 0; i < lEstudiantes.length; i++) {
+				lEstudiantes[i].setApoderado(null);
+			}
 			try {
 				session.delete(apoderado);
 				return true;

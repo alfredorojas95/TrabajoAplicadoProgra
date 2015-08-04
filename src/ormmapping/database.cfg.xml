@@ -256,6 +256,21 @@
     <ServerName></ServerName>
     <SelectedForm>true</SelectedForm>
   </Setting>
+  <Setting type="2">
+    <Driver>MySQL (Connector/J Driver)</Driver>
+    <DriverFiles>C:\Program Files (x86)\MySQL\MySQL Connector J\mysql-connector-java-5.1.33-bin.jar</DriverFiles>
+    <Dialect>org.hibernate.dialect.MySQLDialect</Dialect>
+    <DriverClass>com.mysql.jdbc.Driver</DriverClass>
+    <URL>jdbc:mysql://localhost:3306/trabaplicado</URL>
+    <UserName>root</UserName>
+    <Password></Password>
+    <HostName>localhost</HostName>
+    <PortNO>3306</PortNO>
+    <DBName>trabaplicado</DBName>
+    <ServiceName></ServiceName>
+    <ServerName></ServerName>
+    <SelectedForm>true</SelectedForm>
+  </Setting>
   <Setting type="16777216">
     <Driver></Driver>
     <DriverFiles></DriverFiles>
@@ -267,21 +282,6 @@
     <HostName></HostName>
     <PortNO></PortNO>
     <DBName></DBName>
-    <ServiceName></ServiceName>
-    <ServerName></ServerName>
-    <SelectedForm>true</SelectedForm>
-  </Setting>
-  <Setting type="2">
-    <Driver>MySQL (Connector/J Driver)</Driver>
-    <DriverFiles>C:\Program Files (x86)\MySQL\MySQL Connector J\mysql-connector-java-5.1.33-bin.jar</DriverFiles>
-    <Dialect>org.hibernate.dialect.MySQLDialect</Dialect>
-    <DriverClass>com.mysql.jdbc.Driver</DriverClass>
-    <URL>jdbc:mysql://localhost:3306/dbtrabajoaplicadoprogra</URL>
-    <UserName>root</UserName>
-    <Password></Password>
-    <HostName>localhost</HostName>
-    <PortNO>3306</PortNO>
-    <DBName>dbtrabajoaplicadoprogra</DBName>
     <ServiceName></ServiceName>
     <ServerName></ServerName>
     <SelectedForm>true</SelectedForm>

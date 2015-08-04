@@ -32,6 +32,10 @@ public class Curso {
 		if (key == orm.ORMConstants.KEY_CURSO_DIRECTOR) {
 			this.director = (orm.Director) owner;
 		}
+		
+		else if (key == orm.ORMConstants.KEY_CURSO_JEFEADMINISTRACION) {
+			this.jefeadministracion = (orm.Jefeadministracion) owner;
+		}
 	}
 	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
@@ -47,11 +51,13 @@ public class Curso {
 	
 	private int id;
 	
+	private orm.Director director;
+	
+	private orm.Jefeadministracion jefeadministracion;
+	
 	private String nombreCurso;
 	
 	private Integer estadocurso;
-	
-	private orm.Director director;
 	
 	private Integer cupos;
 	
@@ -125,6 +131,30 @@ public class Curso {
 	
 	private orm.Director getORM_Director() {
 		return director;
+	}
+	
+	public void setJefeadministracion(orm.Jefeadministracion value) {
+		if (jefeadministracion != null) {
+			jefeadministracion.curso.remove(this);
+		}
+		if (value != null) {
+			value.curso.add(this);
+		}
+	}
+	
+	public orm.Jefeadministracion getJefeadministracion() {
+		return jefeadministracion;
+	}
+	
+	/**
+	 * This method is for internal use only.
+	 */
+	public void setORM_Jefeadministracion(orm.Jefeadministracion value) {
+		this.jefeadministracion = value;
+	}
+	
+	private orm.Jefeadministracion getORM_Jefeadministracion() {
+		return jefeadministracion;
 	}
 	
 	private void setORM_Curso_profesor(java.util.Set value) {

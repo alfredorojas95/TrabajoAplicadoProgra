@@ -13,7 +13,7 @@ License Type: Academic
 		<many-to-one name="persona" column="personaid" class="orm.Persona" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy" access="field">
 		</many-to-one>
 		<set name="ORM_Curso" lazy="true" cascade="save-update,lock" inverse="true">
-			<key column="directorid" not-null="true"/>
+			<key column="directorid" not-null="false"/>
 			<one-to-many class="orm.Curso"/>
 		</set>
 	</class>

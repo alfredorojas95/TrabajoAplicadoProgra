@@ -22,6 +22,8 @@ public class EstudianteCriteria extends AbstractORMCriteria {
 	public final IntegerExpression id;
 	public final IntegerExpression personaId;
 	public final AssociationExpression persona;
+	public final IntegerExpression apoderadoId;
+	public final AssociationExpression apoderado;
 	public final CollectionExpression estudiante_curso;
 	public final IntegerExpression matriculaId;
 	public final AssociationExpression matricula;
@@ -32,6 +34,8 @@ public class EstudianteCriteria extends AbstractORMCriteria {
 		id = new IntegerExpression("id", this);
 		personaId = new IntegerExpression("persona.id", this);
 		persona = new AssociationExpression("persona", this);
+		apoderadoId = new IntegerExpression("apoderado.id", this);
+		apoderado = new AssociationExpression("apoderado", this);
 		estudiante_curso = new CollectionExpression("ORM_Estudiante_curso", this);
 		matriculaId = new IntegerExpression("matricula.id", this);
 		matricula = new AssociationExpression("matricula", this);
@@ -48,6 +52,10 @@ public class EstudianteCriteria extends AbstractORMCriteria {
 	
 	public PersonaCriteria createPersonaCriteria() {
 		return new PersonaCriteria(createCriteria("persona"));
+	}
+	
+	public ApoderadoCriteria createApoderadoCriteria() {
+		return new ApoderadoCriteria(createCriteria("apoderado"));
 	}
 	
 	public Estudiante_cursoCriteria createEstudiante_cursoCriteria() {

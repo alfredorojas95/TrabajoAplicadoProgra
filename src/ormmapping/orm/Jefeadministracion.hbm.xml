@@ -12,9 +12,13 @@ License Type: Academic
 		</id>
 		<many-to-one name="persona" column="personaid" class="orm.Persona" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy" access="field">
 		</many-to-one>
-		<set name="ORM_Sueldo_profesor" lazy="true" cascade="save-update,lock" inverse="true">
+		<set name="ORM_Curso" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="jefeadministracionid" not-null="false"/>
-			<one-to-many class="orm.Sueldo_profesor"/>
+			<one-to-many class="orm.Curso"/>
+		</set>
+		<set name="ORM_Sueldo" lazy="true" cascade="save-update,lock" inverse="true">
+			<key column="jefeadministracionid" not-null="false"/>
+			<one-to-many class="orm.Sueldo"/>
 		</set>
 	</class>
 </hibernate-mapping>

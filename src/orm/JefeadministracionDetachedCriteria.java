@@ -22,14 +22,16 @@ public class JefeadministracionDetachedCriteria extends AbstractORMDetachedCrite
 	public final IntegerExpression id;
 	public final IntegerExpression personaId;
 	public final AssociationExpression persona;
-	public final CollectionExpression sueldo_profesor;
+	public final CollectionExpression curso;
+	public final CollectionExpression sueldo;
 	
 	public JefeadministracionDetachedCriteria() {
 		super(orm.Jefeadministracion.class, orm.JefeadministracionCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
 		personaId = new IntegerExpression("persona.id", this.getDetachedCriteria());
 		persona = new AssociationExpression("persona", this.getDetachedCriteria());
-		sueldo_profesor = new CollectionExpression("ORM_Sueldo_profesor", this.getDetachedCriteria());
+		curso = new CollectionExpression("ORM_Curso", this.getDetachedCriteria());
+		sueldo = new CollectionExpression("ORM_Sueldo", this.getDetachedCriteria());
 	}
 	
 	public JefeadministracionDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -37,15 +39,20 @@ public class JefeadministracionDetachedCriteria extends AbstractORMDetachedCrite
 		id = new IntegerExpression("id", this.getDetachedCriteria());
 		personaId = new IntegerExpression("persona.id", this.getDetachedCriteria());
 		persona = new AssociationExpression("persona", this.getDetachedCriteria());
-		sueldo_profesor = new CollectionExpression("ORM_Sueldo_profesor", this.getDetachedCriteria());
+		curso = new CollectionExpression("ORM_Curso", this.getDetachedCriteria());
+		sueldo = new CollectionExpression("ORM_Sueldo", this.getDetachedCriteria());
 	}
 	
 	public PersonaDetachedCriteria createPersonaCriteria() {
 		return new PersonaDetachedCriteria(createCriteria("persona"));
 	}
 	
-	public Sueldo_profesorDetachedCriteria createSueldo_profesorCriteria() {
-		return new Sueldo_profesorDetachedCriteria(createCriteria("ORM_Sueldo_profesor"));
+	public CursoDetachedCriteria createCursoCriteria() {
+		return new CursoDetachedCriteria(createCriteria("ORM_Curso"));
+	}
+	
+	public SueldoDetachedCriteria createSueldoCriteria() {
+		return new SueldoDetachedCriteria(createCriteria("ORM_Sueldo"));
 	}
 	
 	public Jefeadministracion uniqueJefeadministracion(PersistentSession session) {

@@ -20,34 +20,47 @@ import org.orm.criteria.*;
 
 public class SueldoDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final IntegerExpression id;
+	public final IntegerExpression jefeadministracionId;
+	public final AssociationExpression jefeadministracion;
+	public final IntegerExpression profesorId;
+	public final AssociationExpression profesor;
 	public final IntegerExpression monto;
 	public final IntegerExpression mes;
 	public final IntegerExpression cantCursos;
 	public final IntegerExpression estadoPago;
-	public final CollectionExpression sueldo_profesor;
 	
 	public SueldoDetachedCriteria() {
 		super(orm.Sueldo.class, orm.SueldoCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
+		jefeadministracionId = new IntegerExpression("jefeadministracion.id", this.getDetachedCriteria());
+		jefeadministracion = new AssociationExpression("jefeadministracion", this.getDetachedCriteria());
+		profesorId = new IntegerExpression("profesor.id", this.getDetachedCriteria());
+		profesor = new AssociationExpression("profesor", this.getDetachedCriteria());
 		monto = new IntegerExpression("monto", this.getDetachedCriteria());
 		mes = new IntegerExpression("mes", this.getDetachedCriteria());
 		cantCursos = new IntegerExpression("cantCursos", this.getDetachedCriteria());
 		estadoPago = new IntegerExpression("estadoPago", this.getDetachedCriteria());
-		sueldo_profesor = new CollectionExpression("ORM_Sueldo_profesor", this.getDetachedCriteria());
 	}
 	
 	public SueldoDetachedCriteria(DetachedCriteria aDetachedCriteria) {
 		super(aDetachedCriteria, orm.SueldoCriteria.class);
 		id = new IntegerExpression("id", this.getDetachedCriteria());
+		jefeadministracionId = new IntegerExpression("jefeadministracion.id", this.getDetachedCriteria());
+		jefeadministracion = new AssociationExpression("jefeadministracion", this.getDetachedCriteria());
+		profesorId = new IntegerExpression("profesor.id", this.getDetachedCriteria());
+		profesor = new AssociationExpression("profesor", this.getDetachedCriteria());
 		monto = new IntegerExpression("monto", this.getDetachedCriteria());
 		mes = new IntegerExpression("mes", this.getDetachedCriteria());
 		cantCursos = new IntegerExpression("cantCursos", this.getDetachedCriteria());
 		estadoPago = new IntegerExpression("estadoPago", this.getDetachedCriteria());
-		sueldo_profesor = new CollectionExpression("ORM_Sueldo_profesor", this.getDetachedCriteria());
 	}
 	
-	public Sueldo_profesorDetachedCriteria createSueldo_profesorCriteria() {
-		return new Sueldo_profesorDetachedCriteria(createCriteria("ORM_Sueldo_profesor"));
+	public JefeadministracionDetachedCriteria createJefeadministracionCriteria() {
+		return new JefeadministracionDetachedCriteria(createCriteria("jefeadministracion"));
+	}
+	
+	public ProfesorDetachedCriteria createProfesorCriteria() {
+		return new ProfesorDetachedCriteria(createCriteria("profesor"));
 	}
 	
 	public Sueldo uniqueSueldo(PersistentSession session) {

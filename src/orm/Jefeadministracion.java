@@ -18,8 +18,11 @@ public class Jefeadministracion {
 	}
 	
 	private java.util.Set this_getSet (int key) {
-		if (key == orm.ORMConstants.KEY_JEFEADMINISTRACION_SUELDO_PROFESOR) {
-			return ORM_sueldo_profesor;
+		if (key == orm.ORMConstants.KEY_JEFEADMINISTRACION_CURSO) {
+			return ORM_curso;
+		}
+		else if (key == orm.ORMConstants.KEY_JEFEADMINISTRACION_SUELDO) {
+			return ORM_sueldo;
 		}
 		
 		return null;
@@ -36,7 +39,9 @@ public class Jefeadministracion {
 	
 	private orm.Persona persona;
 	
-	private java.util.Set ORM_sueldo_profesor = new java.util.HashSet();
+	private java.util.Set ORM_curso = new java.util.HashSet();
+	
+	private java.util.Set ORM_sueldo = new java.util.HashSet();
 	
 	private void setId(int value) {
 		this.id = value;
@@ -67,15 +72,25 @@ public class Jefeadministracion {
 		return persona;
 	}
 	
-	private void setORM_Sueldo_profesor(java.util.Set value) {
-		this.ORM_sueldo_profesor = value;
+	private void setORM_Curso(java.util.Set value) {
+		this.ORM_curso = value;
 	}
 	
-	private java.util.Set getORM_Sueldo_profesor() {
-		return ORM_sueldo_profesor;
+	private java.util.Set getORM_Curso() {
+		return ORM_curso;
 	}
 	
-	public final orm.Sueldo_profesorSetCollection sueldo_profesor = new orm.Sueldo_profesorSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_JEFEADMINISTRACION_SUELDO_PROFESOR, orm.ORMConstants.KEY_SUELDO_PROFESOR_JEFEADMINISTRACION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	public final orm.CursoSetCollection curso = new orm.CursoSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_JEFEADMINISTRACION_CURSO, orm.ORMConstants.KEY_CURSO_JEFEADMINISTRACION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
+	
+	private void setORM_Sueldo(java.util.Set value) {
+		this.ORM_sueldo = value;
+	}
+	
+	private java.util.Set getORM_Sueldo() {
+		return ORM_sueldo;
+	}
+	
+	public final orm.SueldoSetCollection sueldo = new orm.SueldoSetCollection(this, _ormAdapter, orm.ORMConstants.KEY_JEFEADMINISTRACION_SUELDO, orm.ORMConstants.KEY_SUELDO_JEFEADMINISTRACION, orm.ORMConstants.KEY_MUL_ONE_TO_MANY);
 	
 	public String toString() {
 		return String.valueOf(getId());

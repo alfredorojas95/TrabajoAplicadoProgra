@@ -26,6 +26,7 @@ public class MensualidadDetachedCriteria extends AbstractORMDetachedCriteria {
 	public final AssociationExpression estudiante;
 	public final IntegerExpression mes;
 	public final IntegerExpression monto;
+	public final IntegerExpression cantCursos;
 	
 	public MensualidadDetachedCriteria() {
 		super(orm.Mensualidad.class, orm.MensualidadCriteria.class);
@@ -36,6 +37,7 @@ public class MensualidadDetachedCriteria extends AbstractORMDetachedCriteria {
 		estudiante = new AssociationExpression("estudiante", this.getDetachedCriteria());
 		mes = new IntegerExpression("mes", this.getDetachedCriteria());
 		monto = new IntegerExpression("monto", this.getDetachedCriteria());
+		cantCursos = new IntegerExpression("cantCursos", this.getDetachedCriteria());
 	}
 	
 	public MensualidadDetachedCriteria(DetachedCriteria aDetachedCriteria) {
@@ -47,6 +49,7 @@ public class MensualidadDetachedCriteria extends AbstractORMDetachedCriteria {
 		estudiante = new AssociationExpression("estudiante", this.getDetachedCriteria());
 		mes = new IntegerExpression("mes", this.getDetachedCriteria());
 		monto = new IntegerExpression("monto", this.getDetachedCriteria());
+		cantCursos = new IntegerExpression("cantCursos", this.getDetachedCriteria());
 	}
 	
 	public SecretariaDetachedCriteria createSecretariaCriteria() {

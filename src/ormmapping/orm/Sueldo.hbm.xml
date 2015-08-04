@@ -10,13 +10,13 @@ License Type: Academic
 			<generator class="increment">
 			</generator>
 		</id>
+		<many-to-one name="jefeadministracion" cascade="lock" column="jefeadministracionid" class="orm.Jefeadministracion" not-null="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="profesor" cascade="lock" column="profesorid" class="orm.Profesor" not-null="true" lazy="no-proxy" access="field">
+		</many-to-one>
 		<property name="monto" column="monto" type="integer" length="10" not-null="true" lazy="false"/>
 		<property name="mes" column="mes" type="integer" length="2" not-null="true" lazy="false"/>
 		<property name="cantCursos" column="cantCursos" type="integer" length="10" not-null="true" lazy="false"/>
 		<property name="estadoPago" column="estadoPago" type="integer" length="10" not-null="true" lazy="false"/>
-		<set name="ORM_Sueldo_profesor" lazy="true" cascade="save-update,lock" inverse="true">
-			<key column="sueldoid" not-null="true"/>
-			<one-to-many class="orm.Sueldo_profesor"/>
-		</set>
 	</class>
 </hibernate-mapping>

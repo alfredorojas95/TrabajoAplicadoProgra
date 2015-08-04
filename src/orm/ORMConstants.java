@@ -14,6 +14,8 @@
 package orm;
 
 public interface ORMConstants extends org.orm.util.ORMBaseConstants {
+	final int KEY_APODERADO_ESTUDIANTE = -852510826;
+	
 	final int KEY_APODERADO_PERSONA = 1739127912;
 	
 	final int KEY_CURSO_CURSO_PROFESOR = -366482352;
@@ -22,6 +24,8 @@ public interface ORMConstants extends org.orm.util.ORMBaseConstants {
 	
 	final int KEY_CURSO_ESTUDIANTE_CURSO = 1381893458;
 	
+	final int KEY_CURSO_JEFEADMINISTRACION = 78208108;
+	
 	final int KEY_CURSO_PROFESOR_CURSO = 2002294826;
 	
 	final int KEY_CURSO_PROFESOR_PROFESOR = 280464284;
@@ -29,6 +33,8 @@ public interface ORMConstants extends org.orm.util.ORMBaseConstants {
 	final int KEY_DIRECTOR_CURSO = -430593463;
 	
 	final int KEY_DIRECTOR_PERSONA = 1006092825;
+	
+	final int KEY_ESTUDIANTE_APODERADO = -304214258;
 	
 	final int KEY_ESTUDIANTE_CURSO_CURSO = -1585165204;
 	
@@ -42,9 +48,11 @@ public interface ORMConstants extends org.orm.util.ORMBaseConstants {
 	
 	final int KEY_ESTUDIANTE_PERSONA = 106704479;
 	
+	final int KEY_JEFEADMINISTRACION_CURSO = 1905138886;
+	
 	final int KEY_JEFEADMINISTRACION_PERSONA = -623015594;
 	
-	final int KEY_JEFEADMINISTRACION_SUELDO_PROFESOR = 526101663;
+	final int KEY_JEFEADMINISTRACION_SUELDO = -612564502;
 	
 	final int KEY_MATRICULA_ESTUDIANTE = -871448749;
 	
@@ -70,7 +78,7 @@ public interface ORMConstants extends org.orm.util.ORMBaseConstants {
 	
 	final int KEY_PROFESOR_PERSONA = -1158863241;
 	
-	final int KEY_PROFESOR_SUELDO_PROFESOR = -1789880128;
+	final int KEY_PROFESOR_SUELDO = -1738228567;
 	
 	final int KEY_SECRETARIA_MATRICULA = 656924824;
 	
@@ -78,12 +86,8 @@ public interface ORMConstants extends org.orm.util.ORMBaseConstants {
 	
 	final int KEY_SECRETARIA_PERSONA = -106778298;
 	
-	final int KEY_SUELDO_PROFESOR_JEFEADMINISTRACION = -2067169421;
+	final int KEY_SUELDO_JEFEADMINISTRACION = -1855068940;
 	
-	final int KEY_SUELDO_PROFESOR_PROFESOR = -58994156;
-	
-	final int KEY_SUELDO_PROFESOR_SUELDO = -778733698;
-	
-	final int KEY_SUELDO_SUELDO_PROFESOR = -852971606;
+	final int KEY_SUELDO_PROFESOR = -1812466475;
 	
 }

@@ -327,9 +327,13 @@ public class JefeadministracionDAO {
 				jefeadministracion.getPersona().setJefeadministracion(null);
 			}
 			
-			orm.Sueldo_profesor[] lSueldo_profesors = jefeadministracion.sueldo_profesor.toArray();
-			for(int i = 0; i < lSueldo_profesors.length; i++) {
-				lSueldo_profesors[i].setJefeadministracion(null);
+			orm.Curso[] lCursos = jefeadministracion.curso.toArray();
+			for(int i = 0; i < lCursos.length; i++) {
+				lCursos[i].setJefeadministracion(null);
+			}
+			orm.Sueldo[] lSueldos = jefeadministracion.sueldo.toArray();
+			for(int i = 0; i < lSueldos.length; i++) {
+				lSueldos[i].setJefeadministracion(null);
 			}
 			return delete(jefeadministracion);
 		}
@@ -345,9 +349,13 @@ public class JefeadministracionDAO {
 				jefeadministracion.getPersona().setJefeadministracion(null);
 			}
 			
-			orm.Sueldo_profesor[] lSueldo_profesors = jefeadministracion.sueldo_profesor.toArray();
-			for(int i = 0; i < lSueldo_profesors.length; i++) {
-				lSueldo_profesors[i].setJefeadministracion(null);
+			orm.Curso[] lCursos = jefeadministracion.curso.toArray();
+			for(int i = 0; i < lCursos.length; i++) {
+				lCursos[i].setJefeadministracion(null);
+			}
+			orm.Sueldo[] lSueldos = jefeadministracion.sueldo.toArray();
+			for(int i = 0; i < lSueldos.length; i++) {
+				lSueldos[i].setJefeadministracion(null);
 			}
 			try {
 				session.delete(jefeadministracion);

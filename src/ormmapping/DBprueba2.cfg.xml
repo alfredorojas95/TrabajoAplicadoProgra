@@ -11,7 +11,7 @@ License Type: Academic
    	<!-- properties -->
 		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="connection.url">jdbc:mysql://localhost:3306/dbtrabajoaplicadoprogra</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/trabaplicado</property>
 		<property name="connection.username">root</property>
 		<property name="connection.password"></property>
 		<property name="hibernate.connection.provider_class">org.hibernate.service.jdbc.connections.internal.C3P0ConnectionProvider</property>
@@ -36,6 +36,5 @@ License Type: Academic
 		<mapping resource="ormmapping/orm/Profesor.hbm.xml" />
 		<mapping resource="ormmapping/orm/Secretaria.hbm.xml" />
 		<mapping resource="ormmapping/orm/Sueldo.hbm.xml" />
-		<mapping resource="ormmapping/orm/Sueldo_profesor.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>

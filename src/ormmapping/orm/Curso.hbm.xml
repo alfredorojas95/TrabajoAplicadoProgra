@@ -10,10 +10,12 @@ License Type: Academic
 			<generator class="increment">
 			</generator>
 		</id>
+		<many-to-one name="director" cascade="lock" column="directorid" class="orm.Director" not-null="false" lazy="no-proxy" access="field">
+		</many-to-one>
+		<many-to-one name="jefeadministracion" cascade="lock" column="jefeadministracionid" class="orm.Jefeadministracion" not-null="false" lazy="no-proxy" access="field">
+		</many-to-one>
 		<property name="nombreCurso" column="nombreCurso" type="string" length="20" not-null="true" lazy="false"/>
 		<property name="estadocurso" column="estadocurso" type="integer" length="1" not-null="false" lazy="false"/>
-		<many-to-one name="director" cascade="lock" column="directorid" class="orm.Director" not-null="true" lazy="no-proxy" access="field">
-		</many-to-one>
 		<property name="cupos" column="cupos" type="integer" length="2" not-null="false" lazy="false"/>
 		<set name="ORM_Curso_profesor" lazy="true" cascade="save-update,lock" inverse="true">
 			<key column="cursoid" not-null="true"/>

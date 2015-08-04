@@ -10,11 +10,11 @@ License Type: Academic
 			<generator class="increment">
 			</generator>
 		</id>
-		<property name="estadoMatricula" column="estadoMatricula" type="integer" length="1" not-null="false" lazy="false"/>
-		<property name="monto" column="monto" type="integer" length="10" not-null="false" lazy="false"/>
 		<many-to-one name="secretaria" cascade="lock" column="secretariaid" class="orm.Secretaria" not-null="false" lazy="no-proxy" access="field">
 		</many-to-one>
 		<many-to-one name="estudiante" column="estudianteid" class="orm.Estudiante" cascade="save-update,lock" unique="true" not-null="true" lazy="no-proxy" access="field">
 		</many-to-one>
+		<property name="estadoMatricula" column="estadoMatricula" type="integer" length="1" not-null="false" lazy="false"/>
+		<property name="monto" column="monto" type="integer" length="10" not-null="false" lazy="false"/>
 	</class>
 </hibernate-mapping>

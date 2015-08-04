@@ -20,10 +20,12 @@ import org.orm.criteria.*;
 
 public class CursoCriteria extends AbstractORMCriteria {
 	public final IntegerExpression id;
-	public final StringExpression nombreCurso;
-	public final IntegerExpression estadocurso;
 	public final IntegerExpression directorId;
 	public final AssociationExpression director;
+	public final IntegerExpression jefeadministracionId;
+	public final AssociationExpression jefeadministracion;
+	public final StringExpression nombreCurso;
+	public final IntegerExpression estadocurso;
 	public final IntegerExpression cupos;
 	public final CollectionExpression curso_profesor;
 	public final CollectionExpression estudiante_curso;
@@ -31,10 +33,12 @@ public class CursoCriteria extends AbstractORMCriteria {
 	public CursoCriteria(Criteria criteria) {
 		super(criteria);
 		id = new IntegerExpression("id", this);
-		nombreCurso = new StringExpression("nombreCurso", this);
-		estadocurso = new IntegerExpression("estadocurso", this);
 		directorId = new IntegerExpression("director.id", this);
 		director = new AssociationExpression("director", this);
+		jefeadministracionId = new IntegerExpression("jefeadministracion.id", this);
+		jefeadministracion = new AssociationExpression("jefeadministracion", this);
+		nombreCurso = new StringExpression("nombreCurso", this);
+		estadocurso = new IntegerExpression("estadocurso", this);
 		cupos = new IntegerExpression("cupos", this);
 		curso_profesor = new CollectionExpression("ORM_Curso_profesor", this);
 		estudiante_curso = new CollectionExpression("ORM_Estudiante_curso", this);
@@ -50,6 +54,10 @@ public class CursoCriteria extends AbstractORMCriteria {
 	
 	public DirectorCriteria createDirectorCriteria() {
 		return new DirectorCriteria(createCriteria("director"));
+	}
+	
+	public JefeadministracionCriteria createJefeadministracionCriteria() {
+		return new JefeadministracionCriteria(createCriteria("jefeadministracion"));
 	}
 	
 	public Curso_profesorCriteria createCurso_profesorCriteria() {

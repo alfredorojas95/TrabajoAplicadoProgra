@@ -28,9 +28,27 @@ public class Estudiante {
 		return null;
 	}
 	
+	private void this_setOwner(Object owner, int key) {
+		if (key == orm.ORMConstants.KEY_ESTUDIANTE_PERSONA) {
+			this.persona = (orm.Persona) owner;
+		}
+		
+		else if (key == orm.ORMConstants.KEY_ESTUDIANTE_APODERADO) {
+			this.apoderado = (orm.Apoderado) owner;
+		}
+		
+		else if (key == orm.ORMConstants.KEY_ESTUDIANTE_MATRICULA) {
+			this.matricula = (orm.Matricula) owner;
+		}
+	}
+	
 	org.orm.util.ORMAdapter _ormAdapter = new org.orm.util.AbstractORMAdapter() {
 		public java.util.Set getSet(int key) {
 			return this_getSet(key);
+		}
+		
+		public void setOwner(Object owner, int key) {
+			this_setOwner(owner, key);
 		}
 		
 	};
@@ -38,6 +56,8 @@ public class Estudiante {
 	private int id;
 	
 	private orm.Persona persona;
+	
+	private orm.Apoderado apoderado;
 	
 	private java.util.Set ORM_estudiante_curso = new java.util.HashSet();
 	
@@ -72,6 +92,30 @@ public class Estudiante {
 	
 	public orm.Persona getPersona() {
 		return persona;
+	}
+	
+	public void setApoderado(orm.Apoderado value) {
+		if (apoderado != null) {
+			apoderado.estudiante.remove(this);
+		}
+		if (value != null) {
+			value.estudiante.add(this);
+		}
+	}
+	
+	public orm.Apoderado getApoderado() {
+		return apoderado;
+	}
+	
+	/**
+	 * This method is for internal use only.
+	 */
+	public void setORM_Apoderado(orm.Apoderado value) {
+		this.apoderado = value;
+	}
+	
+	private orm.Apoderado getORM_Apoderado() {
+		return apoderado;
 	}
 	
 	private void setORM_Estudiante_curso(java.util.Set value) {

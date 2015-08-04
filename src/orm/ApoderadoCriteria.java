@@ -19,15 +19,17 @@ import org.orm.PersistentSession;
 import org.orm.criteria.*;
 
 public class ApoderadoCriteria extends AbstractORMCriteria {
+	public final IntegerExpression id;
 	public final IntegerExpression personaId;
 	public final AssociationExpression persona;
-	public final IntegerExpression id;
+	public final CollectionExpression estudiante;
 	
 	public ApoderadoCriteria(Criteria criteria) {
 		super(criteria);
+		id = new IntegerExpression("id", this);
 		personaId = new IntegerExpression("persona.id", this);
 		persona = new AssociationExpression("persona", this);
-		id = new IntegerExpression("id", this);
+		estudiante = new CollectionExpression("ORM_Estudiante", this);
 	}
 	
 	public ApoderadoCriteria(PersistentSession session) {
@@ -40,6 +42,10 @@ public class ApoderadoCriteria extends AbstractORMCriteria {
 	
 	public PersonaCriteria createPersonaCriteria() {
 		return new PersonaCriteria(createCriteria("persona"));
+	}
+	
+	public EstudianteCriteria createEstudianteCriteria() {
+		return new EstudianteCriteria(createCriteria("ORM_Estudiante"));
 	}
 	
 	public Apoderado uniqueApoderado() {

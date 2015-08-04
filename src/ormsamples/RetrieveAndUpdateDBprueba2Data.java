@@ -15,9 +15,6 @@ public class RetrieveAndUpdateDBprueba2Data {
 			orm.Persona lormPersona = orm.PersonaDAO.loadPersonaByQuery(null, null);
 			// Update the properties of the persistent object
 			orm.PersonaDAO.save(lormPersona);
-			orm.Sueldo_profesor lormSueldo_profesor = orm.Sueldo_profesorDAO.loadSueldo_profesorByQuery(null, null);
-			// Update the properties of the persistent object
-			orm.Sueldo_profesorDAO.save(lormSueldo_profesor);
 			orm.Sueldo lormSueldo = orm.SueldoDAO.loadSueldoByQuery(null, null);
 			// Update the properties of the persistent object
 			orm.SueldoDAO.save(lormSueldo);
@@ -71,13 +68,6 @@ public class RetrieveAndUpdateDBprueba2Data {
 		// Please uncomment the follow line and fill in parameter(s)
 		//lormPersonaCriteria.id.eq();
 		System.out.println(lormPersonaCriteria.uniquePersona());
-		
-		System.out.println("Retrieving Sueldo_profesor by Sueldo_profesorCriteria");
-		orm.Sueldo_profesorCriteria lormSueldo_profesorCriteria = new orm.Sueldo_profesorCriteria();
-		// Please uncomment the follow line and fill in parameter(s)
-		//lormSueldo_profesorCriteria.sueldo.eq();
-		//lormSueldo_profesorCriteria.profesor.eq();
-		System.out.println(lormSueldo_profesorCriteria.uniqueSueldo_profesor());
 		
 		System.out.println("Retrieving Sueldo by SueldoCriteria");
 		orm.SueldoCriteria lormSueldoCriteria = new orm.SueldoCriteria();

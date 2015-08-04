@@ -15,9 +15,6 @@ public class DeleteDBprueba2Data {
 			orm.Persona lormPersona = orm.PersonaDAO.loadPersonaByQuery(null, null);
 			// Delete the persistent object
 			orm.PersonaDAO.delete(lormPersona);
-			orm.Sueldo_profesor lormSueldo_profesor = orm.Sueldo_profesorDAO.loadSueldo_profesorByQuery(null, null);
-			// Delete the persistent object
-			orm.Sueldo_profesorDAO.delete(lormSueldo_profesor);
 			orm.Sueldo lormSueldo = orm.SueldoDAO.loadSueldoByQuery(null, null);
 			// Delete the persistent object
 			orm.SueldoDAO.delete(lormSueldo);

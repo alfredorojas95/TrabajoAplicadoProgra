@@ -26,6 +26,7 @@ public class MensualidadCriteria extends AbstractORMCriteria {
 	public final AssociationExpression estudiante;
 	public final IntegerExpression mes;
 	public final IntegerExpression monto;
+	public final IntegerExpression cantCursos;
 	
 	public MensualidadCriteria(Criteria criteria) {
 		super(criteria);
@@ -36,6 +37,7 @@ public class MensualidadCriteria extends AbstractORMCriteria {
 		estudiante = new AssociationExpression("estudiante", this);
 		mes = new IntegerExpression("mes", this);
 		monto = new IntegerExpression("monto", this);
+		cantCursos = new IntegerExpression("cantCursos", this);
 	}
 	
 	public MensualidadCriteria(PersistentSession session) {

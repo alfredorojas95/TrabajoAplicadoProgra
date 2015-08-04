@@ -22,14 +22,16 @@ public class JefeadministracionCriteria extends AbstractORMCriteria {
 	public final IntegerExpression id;
 	public final IntegerExpression personaId;
 	public final AssociationExpression persona;
-	public final CollectionExpression sueldo_profesor;
+	public final CollectionExpression curso;
+	public final CollectionExpression sueldo;
 	
 	public JefeadministracionCriteria(Criteria criteria) {
 		super(criteria);
 		id = new IntegerExpression("id", this);
 		personaId = new IntegerExpression("persona.id", this);
 		persona = new AssociationExpression("persona", this);
-		sueldo_profesor = new CollectionExpression("ORM_Sueldo_profesor", this);
+		curso = new CollectionExpression("ORM_Curso", this);
+		sueldo = new CollectionExpression("ORM_Sueldo", this);
 	}
 	
 	public JefeadministracionCriteria(PersistentSession session) {
@@ -44,8 +46,12 @@ public class JefeadministracionCriteria extends AbstractORMCriteria {
 		return new PersonaCriteria(createCriteria("persona"));
 	}
 	
-	public Sueldo_profesorCriteria createSueldo_profesorCriteria() {
-		return new Sueldo_profesorCriteria(createCriteria("ORM_Sueldo_profesor"));
+	public CursoCriteria createCursoCriteria() {
+		return new CursoCriteria(createCriteria("ORM_Curso"));
+	}
+	
+	public SueldoCriteria createSueldoCriteria() {
+		return new SueldoCriteria(createCriteria("ORM_Sueldo"));
 	}
 	
 	public Jefeadministracion uniqueJefeadministracion() {

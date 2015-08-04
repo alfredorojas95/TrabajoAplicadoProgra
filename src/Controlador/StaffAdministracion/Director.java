@@ -3,7 +3,11 @@ package Controlador.StaffAdministracion;
 import org.orm.PersistentException;
 
 import Controlador.Persona.*;
-
+/**
+ * 
+ * @author Alfredo Rojas
+ *
+ */
 public class Director extends Persona {
 
 	public Director (String nombre, String apellido, String rut) {
@@ -16,17 +20,23 @@ public class Director extends Persona {
 	}
 	
 	/**
-	 * 
-	 * @param NuevaPer
+	 *  este metodo agrega un nuevo director
+	 * @param nombre
+	 * @param apellido
+	 * @param rut
+	 * @param pass
+	 * @return String confirmacion
 	 */
-	public static String agregarNuevoDirector(Persona nuevaPer) {
+	public static String agregarNuevoDirector(String nombre, String apellido, String rut, String pass) {
+		Persona nuevaPer = new Persona(nombre, apellido, rut, pass);
 		try {
 			if (nuevaPer.validarAtributos()) {
-			// Se establece una condicion de busqueda
+				// Se busca la persona
 				String condicionPersona = "rut='" + nuevaPer.getRut() + "'";
-			    // Se asigna a la variable lormPersonaBuscar, la persona con la condicion establecida
 				orm.Persona lormPersonaBuscar = orm.PersonaDAO.loadPersonaByQuery(condicionPersona, null);
-				// Si la persona no existe
+				
+				// Si la persona no existe se crea la persona, se setean los valores y se guarda
+				// despues se crea el director, se setea persona y se guarda
 				if (lormPersonaBuscar == null) {
 					orm.Persona lormPersona = orm.PersonaDAO.createPersona();
 					lormPersona.setNombre(nuevaPer.getNombre());
@@ -34,12 +44,14 @@ public class Director extends Persona {
 					lormPersona.setRut(nuevaPer.getRut());
 					lormPersona.setPass(nuevaPer.getPass());
 					orm.PersonaDAO.save(lormPersona);
+					
 					orm.Director lormDirector = orm.DirectorDAO.createDirector();
 					lormDirector.setPersona(lormPersona);
 					orm.DirectorDAO.save(lormDirector);
+					
 					return "Director ingresado exitosamente";
 				} else {
-					return "El director ingresado ya existe";
+					return "Esta persona ya existe";
 				}
 			}else{
 				return "Atributo no valido";

@@ -36,13 +36,13 @@ public class Matricula {
 	
 	private int id;
 	
-	private Integer estadoMatricula;
-	
-	private Integer monto;
-	
 	private orm.Secretaria secretaria;
 	
 	private orm.Estudiante estudiante;
+	
+	private Integer estadoMatricula;
+	
+	private Integer monto;
 	
 	private void setId(int value) {
 		this.id = value;

@@ -327,6 +327,10 @@ public class EstudianteDAO {
 				estudiante.getPersona().setEstudiante(null);
 			}
 			
+			if(estudiante.getApoderado() != null) {
+				estudiante.getApoderado().estudiante.remove(estudiante);
+			}
+			
 			orm.Estudiante_curso[] lEstudiante_cursos = estudiante.estudiante_curso.toArray();
 			for(int i = 0; i < lEstudiante_cursos.length; i++) {
 				lEstudiante_cursos[i].setEstudiante(null);
@@ -351,6 +355,10 @@ public class EstudianteDAO {
 		try {
 			if(estudiante.getPersona() != null) {
 				estudiante.getPersona().setEstudiante(null);
+			}
+			
+			if(estudiante.getApoderado() != null) {
+				estudiante.getApoderado().estudiante.remove(estudiante);
 			}
 			
 			orm.Estudiante_curso[] lEstudiante_cursos = estudiante.estudiante_curso.toArray();
