@@ -15,6 +15,10 @@ public class Director extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Director(){
+		super();
+	}
+	
 	public Director(String nombre, String apellido, String rut, String pass){
 		super(nombre, apellido, rut, pass);
 	}

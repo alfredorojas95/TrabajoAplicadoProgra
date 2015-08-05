@@ -18,6 +18,9 @@ public class Secretaria extends Persona {
 	public Secretaria(String nombre, String apellido, String rut, String pass){
 		super(nombre, apellido, rut, pass);
 	}
+	public Secretaria(){
+		super();
+	}
 	/**
 	 *  este metodo agrega una nueva secretaria
 	 * @param nombre

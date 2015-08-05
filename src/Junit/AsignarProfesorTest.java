@@ -11,7 +11,7 @@ import Controlador.Academico.Curso;
 import Controlador.Persona.Apoderado;
 
 /**
- * @author wilfri
+ * @author Alfredo Rojas
  *
  */
 public class AsignarProfesorTest {
@@ -22,8 +22,8 @@ public class AsignarProfesorTest {
 	@Test
 	public void testAsignarProfesor() {
 		String resultado="";
-		//int id, String nombreCurso,String rutProfe,String rutJefeAdm
-		resultado =Curso.asignarProfesor(2,"InglesII","137657474","135749802");
+		//int id,String rutProfe,String rutJefeAdm
+		resultado =Curso.asignarProfesor(2,"137657474","135749802");
 		assertTrue(resultado=="profesor asignado");
 	}
 

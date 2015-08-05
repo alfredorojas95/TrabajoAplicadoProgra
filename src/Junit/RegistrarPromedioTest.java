@@ -22,7 +22,7 @@ public class RegistrarPromedioTest {
 	public void testRegistrarPromedio() {
 		String resultado="";
 		//String rutEst, int idCurso, double nota, String rutProf
-		resultado =Profesor.registrarPromedio("155457641", 2, 4.5, "137657474");
+		resultado =Profesor.registrarPromedio("155457641", 2, "4.5", "137657474");
 		assertTrue(resultado=="promedio del curso registrado");
 	}
 

@@ -18,6 +18,10 @@ public class JefeAdm extends Persona {
 	public JefeAdm(String nombre, String apellido, String rut, String pass){
 		super(nombre, apellido, rut, pass);
 	}
+	
+	public JefeAdm(){
+		super();
+	}
 
 	/**
 	 * este metodo agrega un nuevo jefe de administracion

@@ -10,7 +10,11 @@ import Controlador.Academico.Curso;
  */
 public class Sueldo {
 	
-	private static final int ROW_COUNT = 100;
+	public Sueldo(){
+		super();
+		
+	}
+	//private static final int ROW_COUNT = 100;
 
 	private int monto;
 	private int mes;
@@ -45,7 +49,8 @@ public class Sueldo {
 					String condicionprof = "profesor.id='" + lormProfesor.getId() + "'"+ " and mes='"+mes+"'";
 					orm.Sueldo lormSueldo = orm.SueldoDAO.loadSueldoByQuery(condicionprof, null);
 					//orm.Sueldo_profesor lormSueldo_profesor = orm.Sueldo_profesorDAO.loadSueldo_profesorByQuery(condicionprof, null);
-					System.out.println("Nombre: " + lormSueldo.getProfesor().getPersona().getNombre() + "mes: " + lormSueldo.getMes());
+					System.out.println("Nombre: " + lormSueldo.getProfesor().getPersona().getNombre() + " mes: " + lormSueldo.getMes());
+					
 					if(Curso.calcularCantCursos(rutProf)!=0){
 						
 						//si en ese mes el estado es no pagado se paga
@@ -90,8 +95,10 @@ public class Sueldo {
 			
 			//se recorren los sueldos del profesor y se guardan los datos
 			//( nombre, mes, cantCursos, monto y estadoPago)  en la matriz
-			int length = Math.min(ormSueldos.length, ROW_COUNT);
+			//int length = Math.min(ormSueldos.length, ROW_COUNT);
+			int length = ormSueldos.length;
 			String matriz[][] = new String[length][5];
+			
 			for (int i = 0; i < length; i++) {
 				matriz[i][0]=ormSueldos[i].getProfesor().getPersona().getNombre()+" "+ormSueldos[i].getProfesor().getPersona().getApellido();
 				matriz[i][1]=""+ormSueldos[i].getMes();

@@ -10,7 +10,7 @@ import org.junit.Test;
 import Controlador.Academico.StaffAcademico.Estudiante;
 
 /**
- * @author wilfri
+ * @author Alfredo Rojas
  *
  */
 public class VerSituacionEstudianteTest {

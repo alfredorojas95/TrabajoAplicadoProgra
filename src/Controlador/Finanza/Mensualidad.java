@@ -10,9 +10,12 @@ import Controlador.Academico.Curso;
  */
 public class Mensualidad {
 
+	public Mensualidad(){
+		super();
+	}
 	private int mes;
 	private int monto;
-	private static final int ROW_COUNT = 100;
+	//private static final int ROW_COUNT = 100;
 
 	/**
 	 * este método paga la mensualidad de un estudiante
@@ -28,14 +31,20 @@ public class Mensualidad {
 		}
 
 		try {
-			// se crea una variable de busqueda
+			// se busca la secretaria
 			String mapeoRutS = "persona.rut='" + rutSc + "'";
 			orm.Secretaria lormSecretaria = orm.SecretariaDAO.loadSecretariaByQuery(mapeoRutS, null);
 
+			//se busca el estudiante
 			String mapeoRutE = "persona.rut='" + rutEs + "'";
 			orm.Estudiante lormEstudiante = orm.EstudianteDAO.loadEstudianteByQuery(mapeoRutE, null);
+			
+			//se busca la matrícula
+			String buscarMatricula = "estudiante='" + lormEstudiante + "'";
+			orm.Matricula lormMatriculaExiste = orm.MatriculaDAO.loadMatriculaByQuery(buscarMatricula, null);
+			
 			// si la secretaria y el estudiante existen
-			if ((lormSecretaria != null) && (lormEstudiante != null)) {
+			if ((lormSecretaria != null) && (lormEstudiante != null)&&(lormMatriculaExiste.getEstadoMatricula()!=0)) {
 				String condicion = "estudiante='" + lormEstudiante + "' " + " and mes='"+mes+"'";
 				orm.Mensualidad lormMensualidad = orm.MensualidadDAO.loadMensualidadByQuery(condicion, null);
 
@@ -44,9 +53,10 @@ public class Mensualidad {
 					lormMensualidad.setSecretaria(lormSecretaria);
 					lormMensualidad.setMes(mes);
 					int cant=Curso.calcularCantCursos(rutEs);
-					lormMensualidad.setCantCursos(cant);
+					
 					if(cant!= 0){
 						lormMensualidad.setMonto(cant*10000);
+						lormMensualidad.setCantCursos(cant);
 						orm.MensualidadDAO.save(lormMensualidad);
 						return "se registró el pago de la mensualidad exitosamente";
 					} else {
@@ -70,21 +80,22 @@ public class Mensualidad {
 	 * @param mes
 	 * @return String[][] con los datos de los estudiantes
 	 */
-	public static String[][] obtenerListMorososMensualidad(String mes) {
+	public static String[][] obtenerListMorososMensualidad(int mes) {
 
 		String matriz[][];
 		try {
 			//se buscan todas las mensualidad no pagadas en cierto mes
-			String condicionMonto = "monto='" + 0+ "'"+ " and mes<'"+mes+"'";
-			orm.Mensualidad[] ormMensualidads = orm.MensualidadDAO.listMensualidadByQuery(null, null);
-				int length = Math.min(ormMensualidads.length, ROW_COUNT);
+			String condicionMonto = "monto='" + 0+ "' "+" and mes<='"+mes+ "' "+" and cantCurs>'"+0+"'";
+			orm.Mensualidad[] ormMensualidads = orm.MensualidadDAO.listMensualidadByQuery(condicionMonto, null);
+				int length = ormMensualidads.length; //Math.min(ormMensualidads.length, ROW_COUNT);
 				matriz=new String[length][4];
+				
 				//se recorre la lista con los estudiantes morosos y se gurdan sus datos en la matriz
 				for (int i = 0; i < length; i++) {
 					matriz[i][0]=ormMensualidads[i].getEstudiante().getPersona().getRut();
 					matriz[i][1]=""+ormMensualidads[i].getCantCursos();
 					matriz[i][2]=""+ormMensualidads[i].getMes();
-					matriz[i][3]=""+ormMensualidads[i].getMonto();
+					matriz[i][3]=""+(10000*ormMensualidads[i].getCantCursos());
 				}
 				return matriz;
 		} catch (PersistentException e) {
@@ -94,5 +105,6 @@ public class Mensualidad {
 		
 		return null;
 	}
+
 
 }

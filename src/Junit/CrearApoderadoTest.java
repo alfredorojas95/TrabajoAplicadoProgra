@@ -25,7 +25,7 @@ public class CrearApoderadoTest {
 		 * prueba para agregar un Jefe de Administración a la base de datos
 		 */	
 		String resultado="";
-		resultado =Apoderado.agregarNuevoApoderado("Luis","Huilipan","142749802","123456");
+		resultado =Apoderado.agregarNuevoApoderado("Luis","Huilipan","142749802");
 		assertTrue(resultado=="Apoderado ingresado exitosamente");
 	}
 

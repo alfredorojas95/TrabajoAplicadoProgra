@@ -10,7 +10,7 @@ import Controlador.Persona.*;
  */
 public class Estudiante extends Persona {
 
-	private static final int ROW_COUNT = 100;
+	//private static final int ROW_COUNT = 100;
 
 	public Estudiante(String nombre, String apellido, String rut) {
 		super(nombre, apellido, rut);
@@ -18,6 +18,10 @@ public class Estudiante extends Persona {
 	
 	public Estudiante(String nombre, String apellido, String rut, String pass){
 		super(nombre, apellido, rut, pass);
+	}
+	
+	public Estudiante(){
+		super();
 	}
 	
 	/**
@@ -77,7 +81,7 @@ public class Estudiante extends Persona {
 					lormMensualidad.setEstudiante(lormEstudiante);
 					orm.MensualidadDAO.save(lormMensualidad);
 				}
-				return "Se ingreso nuevo alumno correctamente";
+				return "Se ingresó un nuevo alumno correctamente";
 
 			}else{
 				return "No se pudo guardar al estudiante";
@@ -89,10 +93,6 @@ public class Estudiante extends Persona {
 	return null;
 	}
 
-	public void inscribirAlumnos() {
-		// TODO - implement Estudiante.inscribirAlumnos
-		throw new UnsupportedOperationException();
-	}
 
 	/**
 	 * 
@@ -110,16 +110,14 @@ public class Estudiante extends Persona {
 					//se almacenan su datos (estadoMatricula,id,nombre, apellido,rut, nombre y apellido del apoderado)
 					//y se retorna la matriz
 					if (lormEstudiante != null) {
-						String arreglo[]=new String[8];
+						String arreglo[]=new String[5];
 						arreglo[0]=""+lormEstudiante.getMatricula().getEstadoMatricula();
 						arreglo[1]=""+lormEstudiante.getId();
 						arreglo[2]=lormEstudiante.getPersona().getNombre();
 						arreglo[3]=lormEstudiante.getPersona().getApellido();
 						arreglo[4]=lormEstudiante.getPersona().getRut();
-						arreglo[5]=lormEstudiante.getPersona().getPass();
-						arreglo[6]=lormEstudiante.getPersona().getApoderado().getPersona().getNombre();
-						arreglo[7]=lormEstudiante.getPersona().getApoderado().getPersona().getApellido();
-						System.out.println("|id: "+arreglo[1]+" |nombre: "+arreglo[2]+" |Apellido: "+arreglo[3]+" |Matricula: "+arreglo[0]);
+
+						//System.out.println("|id: "+arreglo[1]+" |nombre: "+arreglo[2]+" |Apellido: "+arreglo[3]+" |Matricula: "+arreglo[0]);
 						
 					return arreglo;
 

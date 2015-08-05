@@ -22,7 +22,7 @@ public class RegistrarAsistenciarTest {
 	public void testRegistrarAsistencia() {
 		String resultado="";
 		//String rutEst, int idCurso, double porcAsistencia, String rutProf
-		resultado =Profesor.registrarAsistencia("155457641", 2, 80, "137657474");
+		resultado =Profesor.registrarAsistencia("155457641", 2, "80", "137657474");
 		assertTrue(resultado=="Asistencia registrada");
 	}
 

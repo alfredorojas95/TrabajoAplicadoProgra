@@ -27,6 +27,10 @@ public class Persona {
 		this.pass=pass;
 	}
 	
+	public Persona(){
+		super();
+	}
+	
 	/**
 	 * 
 	 * @return
@@ -59,6 +63,10 @@ public class Persona {
 		this.apellido = apellido;
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public String getRut() {
 		return this.rut;
 	}

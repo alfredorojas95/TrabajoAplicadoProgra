@@ -8,6 +8,9 @@ import org.orm.PersistentException;
  */
 public class Reporte {
 
+	public Reporte(){
+		super();
+	}
 	//private static final int ROW_COUNT = 100;
 
 	/**
@@ -67,6 +70,7 @@ public class Reporte {
 			
 			//int length = Math.min(ormMatriculas.length, ROW_COUNT);
 			int length = ormMatriculas.length;
+			
 			//se recorren todas las matriculas y si la matricula tiene el estado pagado = 1
 			//se le suma a la variable totalMatricula
 			for (int i = 0; i < length; i++) { 

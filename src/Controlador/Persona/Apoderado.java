@@ -18,6 +18,10 @@ public class Apoderado extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public Apoderado(){
+		super();
+	}
+	
 	/**
 	 * este método agrega un nuevo apoderado
 	 * @param nombre
@@ -26,9 +30,9 @@ public class Apoderado extends Persona {
 	 * @param pass
 	 * @return String confirmacion
 	 */
-	public static String agregarNuevoApoderado(String nombre, String apellido, String rut, String pass){
+	public static String agregarNuevoApoderado(String nombre, String apellido, String rut){
 		
-		Persona nuevaPer = new Persona(nombre, apellido, rut, pass);
+		Persona nuevaPer = new Persona(nombre, apellido, rut);
 		try {
 			if (nuevaPer.validarAtributos()) {
 				
@@ -43,7 +47,6 @@ public class Apoderado extends Persona {
 					lormPersona.setNombre(nuevaPer.getNombre());
 					lormPersona.setApellido(nuevaPer.getApellido());
 					lormPersona.setRut(nuevaPer.getRut());
-					lormPersona.setPass(nuevaPer.getPass());
 					orm.PersonaDAO.save(lormPersona);
 					
 					orm.Apoderado lormApoderado = orm.ApoderadoDAO.createApoderado();

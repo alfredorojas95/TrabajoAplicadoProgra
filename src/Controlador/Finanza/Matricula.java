@@ -10,8 +10,11 @@ public class Matricula {
 
 	private int estadoMatricula;
 	private int monto;
-	private static final int ROW_COUNT = 100;
+	//private static final int ROW_COUNT = 100;
 
+	public Matricula(){
+		super();
+	}
 	/**
 	 * este metodo paga la matricula de un estudiante
 	 * @param rutEstudiante
@@ -65,7 +68,8 @@ public class Matricula {
 			// se buscan todas las matricuas cuyo estado sea "0" (no pagado)
 			String condicion = "estadoMatricula='" + 0 + "'";
 			orm.Matricula[] ormMatriculas = orm.MatriculaDAO.listMatriculaByQuery(condicion,null);
-			int length = Math.min(ormMatriculas.length, ROW_COUNT);
+			//int length = Math.min(ormMatriculas.length, ROW_COUNT);
+			int length  = ormMatriculas.length;
 			matriz= new String [length][4];
 			
 			//se recorren todas la matriculas no pagadas y se guardan los datos de los estudiantes
@@ -74,16 +78,16 @@ public class Matricula {
 				matriz[i][0]=ormMatriculas[i].getEstudiante().getPersona().getNombre();
 				matriz[i][1]=ormMatriculas[i].getEstudiante().getPersona().getApellido();
 				matriz[i][2]=ormMatriculas[i].getEstudiante().getPersona().getRut();
-				matriz[i][3]=""+ormMatriculas[i].getMonto();
+				matriz[i][3]=""+20000;
 				System.out.println("|Nombre: "+matriz[i][0]+" |Apellido: "+matriz[i][1]+" |Rut: "+matriz[i][2]+" |Monto: "+matriz[i][3]);
 				
 			}
+			// Se devuelve la lista del estudiantes
 			return matriz;
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// Se devuelve la lista del estudiantes
 		return null;
 	}
 
