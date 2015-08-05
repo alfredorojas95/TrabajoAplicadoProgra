@@ -25,7 +25,8 @@ public class PagarMensualidadTest {
 		 * prueba en que se paga exitosamente una mensualidad
 		 */
 		String resultado="";
-		resultado = Mensualidad.regPagoMensualidad("165643214","155457641",1);
+		//secretaria, est, mes
+		resultado = Mensualidad.regPagoMensualidad("165643214","155457641",4);
 		assertTrue(resultado=="se registró el pago de la mensualidad exitosamente");
 	}
 

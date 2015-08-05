@@ -81,18 +81,20 @@ public class Mensualidad {
 	 * @return String[][] con los datos de los estudiantes
 	 */
 	public static String[][] obtenerListMorososMensualidad(int mes) {
-
 		String matriz[][];
 		try {
+			System.out.println("hola  2");
 			//se buscan todas las mensualidad no pagadas en cierto mes
-			String condicionMonto = "monto='" + 0+ "' "+" and mes<='"+mes+ "' "+" and cantCurs>'"+0+"'";
+			String condicionMonto = "monto='" + 0+ "' "+" and mes<='"+mes+ "' "+" and cantCursos>'"+0+"'";
+
 			orm.Mensualidad[] ormMensualidads = orm.MensualidadDAO.listMensualidadByQuery(condicionMonto, null);
 				int length = ormMensualidads.length; //Math.min(ormMensualidads.length, ROW_COUNT);
 				matriz=new String[length][4];
-				
+
 				//se recorre la lista con los estudiantes morosos y se gurdan sus datos en la matriz
 				for (int i = 0; i < length; i++) {
-					matriz[i][0]=ormMensualidads[i].getEstudiante().getPersona().getRut();
+	
+					matriz[i][0]=""+ormMensualidads[i].getEstudiante().getPersona().getRut();
 					matriz[i][1]=""+ormMensualidads[i].getCantCursos();
 					matriz[i][2]=""+ormMensualidads[i].getMes();
 					matriz[i][3]=""+(10000*ormMensualidads[i].getCantCursos());

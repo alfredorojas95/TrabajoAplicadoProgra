@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -47,53 +47,6 @@
   <ns1:parameter name="wsdlTargetNamespace" value="http://Finanza.Controlador"/>
   <ns1:parameter name="wsdlServiceElement" value="MatriculaService"/>
   <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns3:ArrayOf_xsd_string" xmlns:ns3="http://Finanza.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
- </ns1:service>
- <ns1:service name="Curso" provider="java:RPC" style="wrapped" use="literal">
-  <ns1:operation name="calcularCantCursos" qname="ns4:calcularCantCursos" returnQName="ns4:calcularCantCursosReturn" returnType="xsd:int" soapAction="" xmlns:ns4="http://Academico.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns4:rut" type="xsd:string"/>
-  </ns1:operation>
-  <ns1:operation name="actualizarCambios" qname="ns5:actualizarCambios" soapAction="" xmlns:ns5="http://Academico.Controlador">
-   <ns1:parameter qname="ns5:rut" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  </ns1:operation>
-  <ns1:operation name="inscribirEstudiantes" qname="ns6:inscribirEstudiantes" returnQName="ns6:inscribirEstudiantesReturn" returnType="xsd:string" soapAction="" xmlns:ns6="http://Academico.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns6:idCurso" type="xsd:int"/>
-   <ns1:parameter qname="ns6:rutEstudiante" type="xsd:string"/>
-   <ns1:parameter qname="ns6:rutProf" type="xsd:string"/>
-  </ns1:operation>
-  <ns1:operation name="desactivarCurso" qname="ns7:desactivarCurso" returnQName="ns7:desactivarCursoReturn" returnType="xsd:string" soapAction="" xmlns:ns7="http://Academico.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns7:id" type="xsd:int"/>
-   <ns1:parameter qname="ns7:rutDirector" type="xsd:string"/>
-  </ns1:operation>
-  <ns1:operation name="crearCurso" qname="ns8:crearCurso" returnQName="ns8:crearCursoReturn" returnType="xsd:string" soapAction="" xmlns:ns8="http://Academico.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns8:nombreCurso" type="xsd:string"/>
-   <ns1:parameter qname="ns8:rutJefeAdm" type="xsd:string"/>
-  </ns1:operation>
-  <ns1:operation name="getNombreCurso" qname="ns9:getNombreCurso" returnQName="ns9:getNombreCursoReturn" returnType="xsd:string" soapAction="" xmlns:ns9="http://Academico.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  <ns1:operation name="asignarProfesor" qname="ns10:asignarProfesor" returnQName="ns10:asignarProfesorReturn" returnType="xsd:string" soapAction="" xmlns:ns10="http://Academico.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns10:id" type="xsd:int"/>
-   <ns1:parameter qname="ns10:rutProfe" type="xsd:string"/>
-   <ns1:parameter qname="ns10:rutJefeAdm" type="xsd:string"/>
-  </ns1:operation>
-  <ns1:operation name="setNombre" qname="ns11:setNombre" soapAction="" xmlns:ns11="http://Academico.Controlador">
-   <ns1:parameter qname="ns11:nombre" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  </ns1:operation>
-  <ns1:operation name="bucarCursos" qname="ns12:bucarCursos" returnQName="ns12:bucarCursosReturn" returnType="ns12:ArrayOf_xsd_string" soapAction="" xmlns:ns12="http://Academico.Controlador">
-   <ns1:parameter qname="ns12:rut" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
-  </ns1:operation>
-  <ns1:operation name="buscarCurso" qname="ns13:buscarCurso" returnQName="ns13:buscarCursoReturn" returnType="xsd:string" soapAction="" xmlns:ns13="http://Academico.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <ns1:parameter qname="ns13:idCurso" type="xsd:int"/>
-  </ns1:operation>
-  <ns1:parameter name="sendMultiRefs" value="false"/>
-  <ns1:parameter name="wsdlServicePort" value="Curso"/>
-  <ns1:parameter name="schemaQualified" value="http://Academico.Controlador"/>
-  <ns1:parameter name="className" value="Controlador.Academico.Curso"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
-  <ns1:parameter name="allowedMethods" value="asignarProfesor buscarCurso calcularCantCursos actualizarCambios crearCurso inscribirEstudiantes setNombre desactivarCurso getNombreCurso bucarCursos"/>
-  <ns1:parameter name="wsdlServiceElement" value="CursoService"/>
-  <ns1:parameter name="wsdlTargetNamespace" value="http://Academico.Controlador"/>
-  <ns1:parameter name="wsdlPortType" value="Curso"/>
-  <ns1:parameter name="sendXsiTypes" value="false"/>
-  <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns14:ArrayOf_xsd_string" xmlns:ns14="http://Academico.Controlador" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
  </ns1:service>
  <ns1:transport name="http">
   <ns1:requestFlow>

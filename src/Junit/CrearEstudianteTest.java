@@ -25,8 +25,9 @@ public class CrearEstudianteTest {
 		 * prueba en que se agrega exitosamente un nuevo estudiante
 		 */
 		String resultado="";
+		resultado = Estudiante.agregarNuevoEstudiante("Alexander","Pinilla","155457641","123456","142749802");
 		resultado = Estudiante.agregarNuevoEstudiante("Danilo","Ramirez","145457641","123456","142749802");
-		assertTrue(resultado=="Se ingreso nuevo alumno correctamente");
+		assertTrue(resultado=="Se ingresó un nuevo alumno correctamente");
 		
 		
 		/*

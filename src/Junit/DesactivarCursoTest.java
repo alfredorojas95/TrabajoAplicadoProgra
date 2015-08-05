@@ -22,7 +22,7 @@ public class DesactivarCursoTest {
 	public void testDesactivarCurso() {
 		String resultado="";
 		//int id, String rutDirector
-		resultado = Curso.desactivarCurso(1, "92749802");
+		resultado = Curso.desactivarCurso(2, "92749802");
 		assertTrue(resultado=="Curso desactivado Exitosamente");
 	}
 

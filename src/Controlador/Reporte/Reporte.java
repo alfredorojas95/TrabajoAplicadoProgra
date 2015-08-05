@@ -172,7 +172,7 @@ public class Reporte {
 		            
 		     }
 		     totalIngresoMatricula=0;
-		     System.out.println(matrizBalance[i][0]+" y "+matrizBalance[i][1] +" y "+matrizBalance[i][2]);
+		     //System.out.println(matrizBalance[i][0]+" y "+matrizBalance[i][1] +" y "+matrizBalance[i][2]);
 		}
 		return matrizBalance;
 		

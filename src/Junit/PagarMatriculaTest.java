@@ -24,7 +24,7 @@ public class PagarMatriculaTest {
 		 * prueba para pagar la matrícula de un estudiante 
 		 */
 		String resultado="";
-		resultado =Matricula.pagarMatricula("145457641", "165643214");
+		resultado =Matricula.pagarMatricula("155457641", "165643214");
 		assertTrue(resultado=="matricula pagada exitosamente");
 	
 		/*

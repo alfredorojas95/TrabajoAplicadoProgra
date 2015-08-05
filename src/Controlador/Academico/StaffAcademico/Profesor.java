@@ -115,9 +115,10 @@ public class Profesor extends Persona {
 	/**
 	 * este métodoregistra el promedio de un alumno en cierto curso
 	 * @param rutEst
-	 * @param idCurso código curso
-	 * @param nota	a registrar
-	 * @return String mensaje de confirmación
+	 * @param idCurso
+	 * @param notaS
+	 * @param rutProf
+	 * @return
 	 */
 	public static String registrarPromedio(String rutEst, int idCurso, String notaS, String rutProf) {
 	       double nota = 0;
@@ -128,37 +129,32 @@ public class Profesor extends Persona {
 	        	nota = Math.rint(nota*100)/100;
 	        	
 	        	try {
-	    			//se busca el estudiante
-	    			String conEstudiante = "persona.rut='" + rutEst+ "'";
-	    			orm.Estudiante lormEstudiante = orm.EstudianteDAO.loadEstudianteByQuery(conEstudiante, null);
+	        		//se busca el curso con ese profesor
+	        		String condicionCurso = "curso.id='" + idCurso+ "'"+ "and profesor.persona.rut='" + rutProf + "'";
+	    			orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.loadCurso_profesorByQuery(condicionCurso, null);
 	    			
-	    			//buscar la relación curso estudiante con el id del estudiante y id curso
-	    			String condEstCurso = "estudiante='" + lormEstudiante+ "'"+" and curso.id='"+idCurso+"'";
-	    			orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.loadEstudiante_cursoByQuery(condEstCurso, null);
-	    		
+	    			//se busca que exista el estudiante en ese curso
+	    			String condEstCurso = "estudiante.persona.rut='" + rutEst + "'"+ " and curso.id='" + idCurso + "'";
+					orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.loadEstudiante_cursoByQuery(condEstCurso, null);  			
+
 	    			//verificar que el estudiante exista y no se le haya registrado un promedio
-	    			if((lormEstudiante!=null)&&(lormEstudiante_curso!=null)&&(lormEstudiante_curso.getPromedio()==null)){
-	    				String condicionCurso_profesor = "curso.id='" + idCurso + "'";
-	    				orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.loadCurso_profesorByQuery(condicionCurso_profesor, null);
+	    			if((lormEstudiante_curso!=null)&&(lormCurso_profesor!=null)){
 	    				
 	    				//verificar que el profesor que quiere registrar el promedio sea el mismo que creo el curso
-	    				if(lormCurso_profesor.getProfesor().getPersona().getRut().equals(rutProf)){
+	    				if(lormEstudiante_curso.getPromedio()==null){
 	    					lormEstudiante_curso.setPromedio(nota);
 	    					orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
 	    					return "promedio del curso registrado";
 	    			} else {
-	    				return "el profesor no corresponde";
+	    				return "La nota ya había sido asignada";
 	    			}
 	    			} else {
-	    				return "no se pudo registrar el primedio";
+	    				return "Profesor o estudiante no corresponden";
 	    			}
 	    		} catch (PersistentException e) {
 	    			// TODO Auto-generated catch block
 	    			e.printStackTrace();
-	    		}
-	        	
-	            
-	            
+	    		}    
 	        }else {
 	        	return "el valor no es número";
 	        }
@@ -182,28 +178,27 @@ public class Profesor extends Persona {
 	        	porcAsistencia = Double.parseDouble(dato);
 	        	porcAsistencia = Math.rint(porcAsistencia*100)/100;
 	        	try {
-	    			String conEstudiante = "persona.rut='" + rutEst+ "'";
-	    			orm.Estudiante lormEstudiante = orm.EstudianteDAO.loadEstudianteByQuery(conEstudiante, null);
+	        		//se busca el curso con ese profesor
+	        		String condicionCurso = "curso.id='" + idCurso+ "'"+ "and profesor.persona.rut='" + rutProf + "'";
+	    			orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.loadCurso_profesorByQuery(condicionCurso, null);
 	    			
-	    			//buscar la relación curso estudiante con el id del estudiante y id curso
-	    			String condEstCurso = "estudiante='" + lormEstudiante+ "'"+" and curso.id='"+idCurso+"'";
-	    			orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.loadEstudiante_cursoByQuery(condEstCurso, null);
-	    		
-	    			//verificar que el estudiante exista y no se le haya registrado una asistencia
-	    			if((lormEstudiante!=null)&&(lormEstudiante_curso!=null)&&(lormEstudiante_curso.getPorcAsistencia()==null)){
-	    				String condicionCurso_profesor = "curso.id='" + idCurso + "'";
-	    				orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.loadCurso_profesorByQuery(condicionCurso_profesor, null);
+	    			//se busca que exista el estudiante en ese curso
+	    			String condEstCurso = "estudiante.persona.rut='" + rutEst + "'"+ " and curso.id='" + idCurso + "'";
+					orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.loadEstudiante_cursoByQuery(condEstCurso, null);  			
+
+	    			//verificar que el estudiante exista y no se le haya registrado un promedio
+	    			if((lormEstudiante_curso!=null)&&(lormCurso_profesor!=null)){
 	    				
 	    				//verificar que el profesor que quiere registrar el promedio sea el mismo que creo el curso
-	    				if(lormCurso_profesor.getProfesor().getPersona().getRut().equals(rutProf)){
+	    				if(lormEstudiante_curso.getPorcAsistencia()==null){
 	    					lormEstudiante_curso.setPorcAsistencia(porcAsistencia);
 	    					orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
-	    					return "Asistencia registrada";
+	    					return "Porcentaje de asistencia asignado";
 	    			} else {
-	    				return "el profesor no coincide";
+	    				return "El porcentaje ya había sido asignado";
 	    			}
 	    			} else {
-	    				return "no se pudo ingresar el porcentaje de asistencia asignado";
+	    				return "Profesor o Estudiante no coinciden";
 	    			}
 	    		} catch (PersistentException e) {
 	    			// TODO Auto-generated catch block

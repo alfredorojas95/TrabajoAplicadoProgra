@@ -147,7 +147,7 @@ public class Estudiante extends Persona {
 			if(lormEstudiante!=null){//estudiante existe
 				
 				//se buscan todos los cursos del estudiante
-				String condicionEst_curso = "estudiante='" + lormEstudiante	+ "'";
+				String condicionEst_curso = "estudiante='" + lormEstudiante + "'"+ " and curso.estadocurso='" + 1 + "'";
 				orm.Estudiante_curso[] ormEstudiante_cursos = orm.Estudiante_cursoDAO.listEstudiante_cursoByQuery(condicionEst_curso, null);
 				
 				//se recorren los cursos del estudiante y se obtiene el promedio de ese curso
@@ -185,11 +185,12 @@ public class Estudiante extends Persona {
 		double promedioAsistencia = 0, sumatoria = 0;	
 		try {	
 			//se busca al estudiante 
+			
 			String condicionEst = "persona.rut='" + rutEstudiante	+ "'";
 			orm.Estudiante lormEstudiante = orm.EstudianteDAO.loadEstudianteByQuery(condicionEst, null);
 			
 			if(lormEstudiante!=null){
-				String condicionEst_curso = "estudiante='" + lormEstudiante	+ "'";
+				String condicionEst_curso = "estudiante='" + lormEstudiante + "'"+ " and curso.estadocurso='" + 1 + "'";
 				orm.Estudiante_curso[] ormEstudiante_cursos = orm.Estudiante_cursoDAO.listEstudiante_cursoByQuery(condicionEst_curso, null);
 			
 			//se buscan todos los curso del estudiante y se obtiene el porcentaje de asistencia

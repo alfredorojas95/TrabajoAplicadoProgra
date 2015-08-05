@@ -23,7 +23,7 @@ public class VerSituacionEstudianteTest {
 		String resultado="";
 		resultado = Estudiante.obtenerSituacionEstudiante("155457641");
 		System.out.println(resultado);
-		assertTrue(resultado=="El promedio es: " + 5.0 + "\nLa asistencia es: " + 75.0 + "%");
+		assertTrue(resultado=="El promedio es: " + 5.8 + "\nLa asistencia es: " + 80.5 + "%");
 	}
 
 }
