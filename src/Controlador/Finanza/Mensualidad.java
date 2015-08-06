@@ -2,6 +2,8 @@ package Controlador.Finanza;
 
 import org.orm.PersistentException;
 
+import com.google.gson.Gson;
+
 import Controlador.Academico.Curso;
 /**
  * 
@@ -78,12 +80,13 @@ public class Mensualidad {
 	/**
 	 * este método obtiene el listado de los estudiantes morosos en el pago de la mensualidad
 	 * @param mes
-	 * @return String[][] con los datos de los estudiantes
+	 * @return
 	 */
-	public static String[][] obtenerListMorososMensualidad(int mes) {
+	public static String obtenerListMorososMensualidad(int mes) {
 		String matriz[][];
+		Gson gson = new Gson();
+		String listaMorososMensualidad=null;
 		try {
-			System.out.println("hola  2");
 			//se buscan todas las mensualidad no pagadas en cierto mes
 			String condicionMonto = "monto='" + 0+ "' "+" and mes<='"+mes+ "' "+" and cantCursos>'"+0+"'";
 
@@ -99,13 +102,13 @@ public class Mensualidad {
 					matriz[i][2]=""+ormMensualidads[i].getMes();
 					matriz[i][3]=""+(10000*ormMensualidads[i].getCantCursos());
 				}
-				return matriz;
+				listaMorososMensualidad = gson.toJson(matriz);
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return null;
+		return listaMorososMensualidad;
 	}
 
 

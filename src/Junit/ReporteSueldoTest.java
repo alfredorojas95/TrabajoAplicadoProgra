@@ -5,6 +5,9 @@ package Junit;
 
 import org.junit.Test;
 
+import com.google.gson.Gson;
+
+import Controlador.Finanza.Mensualidad;
 import Controlador.Finanza.Sueldo;
 
 /**
@@ -18,13 +21,11 @@ public class ReporteSueldoTest {
 	 */
 	@Test
 	public void testConsSueldoProf() {
-		String [][]consulta = Sueldo.consSueldoProf("137657474");
-		//assertTrue(morosos!=null);
-		for (int i = 0; i < consulta.length; i++) {
-	
-				System.out.println("Nombre: "+ consulta[i][0]);
-			
-		}
+
+		Gson gson = new Gson();
+		String json=Sueldo.consSueldoProf("137657474");
+		String[][] matriz = gson.fromJson(json, String[][].class);
+		System.out.println(json);
 	}
 
 }

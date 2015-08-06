@@ -4,10 +4,14 @@
 package Junit;
 
 import org.junit.Test;
+
+import com.google.gson.Gson;
+
+import Controlador.Finanza.Sueldo;
 import Controlador.Reporte.Reporte;
 
 /**
- * @author wilfri
+ * @author Alfredo Rojas
  *
  */
 public class ReporteIngresoGastoTest {
@@ -18,13 +22,10 @@ public class ReporteIngresoGastoTest {
 	@Test
 	public void testObtenerBalanceIngGasto() {
 		
-		String [][]meses = Reporte.obtenerBalanceIngGasto();
-
-		for (int i = 0; i < meses.length; i++) {
-	
-				System.out.println("Ingreso: "+ meses[i][0]+" gasto: "+ meses[i][1]+" Total: "+ meses[i][2]);
-			
-		}
+		Gson gson = new Gson();
+		String json=Reporte.obtenerBalanceIngGasto();
+		String[][] matriz = gson.fromJson(json, String[][].class);
+		System.out.println(json);
 	}
 
 }

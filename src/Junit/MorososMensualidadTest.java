@@ -7,6 +7,9 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.google.gson.Gson;
+
+import Controlador.Finanza.Matricula;
 import Controlador.Finanza.Mensualidad;
 
 /**
@@ -21,13 +24,11 @@ public class MorososMensualidadTest {
 	@Test
 	public void testObtenerListMorososMensualidad() {
 		
-		String [][]morosos = Mensualidad.obtenerListMorososMensualidad(5);
 		//assertTrue(morosos!=null);
-		for (int i = 0; i < morosos.length; i++) {
-	
-				System.out.println("Nombre: "+ morosos[i][0]);
-			
-		}
+		Gson gson = new Gson();
+		String json=Mensualidad.obtenerListMorososMensualidad(5);
+		String[][] matriz = gson.fromJson(json, String[][].class);
+		System.out.println(json);
 	}
 
 }

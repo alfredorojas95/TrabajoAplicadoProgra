@@ -1,6 +1,7 @@
 package Controlador.Academico;
 
 import  org.orm.PersistentException;
+import com.google.gson.Gson;
 /**
  * 
  * @author Alfredo Rojas
@@ -311,11 +312,14 @@ public class Curso {
 	 * este método busca los cursos de una persona
 	 * ya sea estudiante o profesor
 	 * @param rut
-	 * @return String[][] con los datos 
+	 * @return
 	 */
-	public static String[][] bucarCursos(String rut){
+	public static String bucarCursos(String rut){
 		
 		String matriz[][];
+		Gson gson = new Gson();
+		String cursos=null;
+		
 		try {
 			//se identifica a que persona corresponde el rut
 			String condicion = "persona.rut='" + rut + "'";
@@ -341,7 +345,8 @@ public class Curso {
 					matriz[i][3]=""+ormCurso_profesors[i].getCurso().getCupos();
 					System.out.println("|id: "+matriz[i][0]+" |nombre: "+matriz[i][1]+" |Estado: "+matriz[i][2]+" |Cupos: "+matriz[i][3]);
 				}
-				return matriz;
+				cursos = gson.toJson(matriz);
+				return cursos;
 				//se buscan los cursos del estudiante
 			} else if (lormEstudiante != null) {
 				System.out.println("estudiante: "+lormEstudiante.getPersona().getNombre());
@@ -361,7 +366,8 @@ public class Curso {
 					matriz[i][3]=""+ormEstudiante_cursos[i].getPorcAsistencia();
 					System.out.println("|id: "+matriz[i][0]+" |nombre: "+matriz[i][1]+" |Promedio: "+matriz[i][2]+" |Asistencia: "+matriz[i][3]);
 				}
-				return matriz;
+				cursos = gson.toJson(matriz);
+				return cursos;
 			} else {
 				return null;
 			}

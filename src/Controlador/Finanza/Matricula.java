@@ -1,6 +1,8 @@
 package Controlador.Finanza;
 
 import org.orm.PersistentException;
+
+import com.google.gson.Gson;
 /**
  * 
  * @author Alfredo Rojas
@@ -62,8 +64,14 @@ public class Matricula {
 			return null;
 		}
 
-	public static String[][] obtenerListMorososMatricula() {
+	/**
+	 * este método devuelve una notación json conlos estudiantes morosos en el pago de la matrícula
+	 * @return
+	 */
+	public static String obtenerListMorososMatricula() {
 		String matriz[][];
+		Gson gson = new Gson();
+		String listaMorososMatricula=null;
 		try {
 			// se buscan todas las matricuas cuyo estado sea "0" (no pagado)
 			String condicion = "estadoMatricula='" + 0 + "'";
@@ -75,20 +83,20 @@ public class Matricula {
 			//se recorren todas la matriculas no pagadas y se guardan los datos de los estudiantes
 			//nombre, apellido, rut, monto
 			for (int i = 0; i < length; i++) {
+				
 				matriz[i][0]=ormMatriculas[i].getEstudiante().getPersona().getNombre();
 				matriz[i][1]=ormMatriculas[i].getEstudiante().getPersona().getApellido();
 				matriz[i][2]=ormMatriculas[i].getEstudiante().getPersona().getRut();
 				matriz[i][3]=""+20000;
-				System.out.println("|Nombre: "+matriz[i][0]+" |Apellido: "+matriz[i][1]+" |Rut: "+matriz[i][2]+" |Monto: "+matriz[i][3]);
+				//System.out.println("|Nombre: "+matriz[i][0]+" |Apellido: "+matriz[i][1]+" |Rut: "+matriz[i][2]+" |Monto: "+matriz[i][3]);
 				
 			}
-			// Se devuelve la lista del estudiantes
-			return matriz;
+			listaMorososMatricula = gson.toJson(matriz);
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return listaMorososMatricula;
 	}
 
 }

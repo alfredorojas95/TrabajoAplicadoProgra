@@ -1,6 +1,8 @@
 package Controlador.Reporte;
 
 import org.orm.PersistentException;
+
+import com.google.gson.Gson;
 /**
  * 
  * @author Alfredo Rojas
@@ -150,17 +152,21 @@ public class Reporte {
 	/**
 	 * este metodo calcula el balance de los ingresos de matricula, mensualidad
 	 * y le resta los montos de los sueldos pagados a los profesores
-	 * @return String[][]
+	 * @return
 	 */
-	public static String[][] obtenerBalanceIngGasto() {
+	public static String obtenerBalanceIngGasto() {
+		String matrizBalance[][];
 		int totalIngresoMatricula=0;
+		
+		Gson gson = new Gson();
+		String balance=null;
 		
 		int[] balanceSueldo=balanceSueldoProfes();//se obtienen los sueldos pagados a los profesores
 		int[] balanceMensualidad=balanceMensualidad();//se obtienen los montos de mensualidad
 		totalIngresoMatricula=balanceMatricula();//int, se obtienen los montos de matricla
 		
 		//se crea la matriz de 10 meses y 3 valores por mes
-		String[][] matrizBalance= new String[10][3];
+		matrizBalance= new String[10][3];
 		for (int i = 0; i < matrizBalance.length; i++) {  //número de filas
 		     for (int j = 0; j < matrizBalance[i].length; j++) { //número de columnas
 		        
@@ -174,7 +180,8 @@ public class Reporte {
 		     totalIngresoMatricula=0;
 		     //System.out.println(matrizBalance[i][0]+" y "+matrizBalance[i][1] +" y "+matrizBalance[i][2]);
 		}
-		return matrizBalance;
+		balance = gson.toJson(matrizBalance);
+		return balance;
 		
 	}
 

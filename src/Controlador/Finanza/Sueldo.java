@@ -2,6 +2,8 @@ package Controlador.Finanza;
 
 import org.orm.PersistentException;
 
+import com.google.gson.Gson;
+
 import Controlador.Academico.Curso;
 /**
  * 
@@ -80,9 +82,11 @@ public class Sueldo {
 	/**
 	 * este método consulta todos los sueldos de un profesor y devuelve sus datos
 	 * @param rutProf
-	 * @return String[][] datos del profesor
+	 * @return
 	 */
-	public static String[][] consSueldoProf(String rutProf) {
+	public static String consSueldoProf(String rutProf) {
+		Gson gson = new Gson();
+		String sueldosProfesor=null;
 		try {
 			//se busca al profesor
 			String condicion = "persona.rut='" + rutProf + "'";
@@ -106,7 +110,8 @@ public class Sueldo {
 				matriz[i][3]=""+ormSueldos[i].getMonto();
 				matriz[i][4]=""+ormSueldos[i].getEstadoPago();
 			}
-			return matriz;
+			sueldosProfesor = gson.toJson(matriz);
+			return sueldosProfesor;
 			}
 			return null;
 		} catch (PersistentException e) {
