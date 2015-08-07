@@ -108,7 +108,7 @@ public class Curso {
 			lormCurso.setCupos(40);
 			orm.CursoDAO.save(lormCurso);
 			
-			return "se creo el curso exitosamente";
+			return "se creó el curso exitosamente";
 			}else{
 				return "Jefe de Administracion inválido";
 			}
@@ -242,6 +242,9 @@ public class Curso {
 				String condicionCurso = "curso.id='" + idCurso+ "' "+ "and profesor.persona.rut='" + rutProf + "'";
 				orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.loadCurso_profesorByQuery(condicionCurso, null);
 				
+				String condicionEstCurso = "curso.id='" + idCurso+ "' "+ "and estudiante.persona.rut='" + rutEstudiante + "'";
+				orm.Estudiante_curso lormEstudiante_cursoA = orm.Estudiante_cursoDAO.loadEstudiante_cursoByQuery(condicionEstCurso, null);
+				
 				if (lormCurso_profesor != null) {//curso asignado a ese profesor existe
 					
 					orm.Curso lormCurso = lormCurso_profesor.getCurso();//se busca el curso
@@ -250,26 +253,33 @@ public class Curso {
 					String condicionEstudiante = "persona.rut='" + rutEstudiante+ "'";
 					orm.Estudiante lormEstudiante = orm.EstudianteDAO.loadEstudianteByQuery(condicionEstudiante, null);
 					
-					if (lormEstudiante != null) {//estudiante existe, curso activo y quedan cupos
-						if ((lormCurso.getEstadocurso() == 1)&& (lormCurso.getCupos() > 0)) {
-							
-							//se crea la relacion estudiante curso
-							orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.createEstudiante_curso();
-							lormEstudiante_curso.setCurso(lormCurso);
-							lormEstudiante_curso.setEstudiante(lormEstudiante);
-							lormCurso.setCupos(lormCurso.getCupos() - 1);
-							actualizarCambios(rutEstudiante);//se actualizan los corsos del estudiante
-							orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
-							
-							return "alumno asignado";
-
-						} else {
-							return "no se asignó el alumno";
+					if (lormEstudiante != null) {//estudiante existe
+						if(lormEstudiante_cursoA==null){//el estudiante no está en ese curso
+							if (lormCurso.getEstadocurso() == 1){//curso activo
+								if(lormCurso.getCupos() > 0){//curso con cupos
+									//se crea la relacion estudiante curso
+									orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.createEstudiante_curso();
+									lormEstudiante_curso.setCurso(lormCurso);
+									lormEstudiante_curso.setEstudiante(lormEstudiante);
+									lormCurso.setCupos(lormCurso.getCupos() - 1);
+									actualizarCambios(rutEstudiante);//se actualizan los corsos del estudiante
+									orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
+									return "alumno asignado";
+								} else {
+									return "No quedan cupos en este curso";
+								}
+							} else {
+								return "El curso está desactivado";
+							}
+						}else{
+							return "Este estudiante ya había sido asignado a este curso";
 						}
-					}
-					return "no se asignó el alumno";
-				}
-				return "No existe relacion entre profesor y curso";
+					} else {
+						return "El estudiante no existe";
+					}				
+				} else {
+					return "No existe relacion entre el profesor y el curso";
+				}						
 			} catch (PersistentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
