@@ -108,7 +108,10 @@ public class Curso {
 			lormCurso.setCupos(40);
 			orm.CursoDAO.save(lormCurso);
 			
-			return "se creó el curso exitosamente";
+			String nombre = lormCurso.getNombreCurso();
+			int codigo = lormCurso.getId();
+			
+			return "se creó el curso: "+ nombre+", código: "+ codigo;
 			}else{
 				return "Jefe de Administracion inválido";
 			}
