@@ -42,36 +42,40 @@ public class Curso {
 			orm.Director lormDirector = orm.DirectorDAO.loadDirectorByQuery(condicionDirector, null);
 			
 			//se verifica que el curso y el director existan 
-			if((lormCurso!=null)&&(lormDirector!=null)){
-				//el estado "1" representa que el curso está activado
-				if(lormCurso.getEstadocurso()==1){
-					lormCurso.setEstadocurso(0);
-					lormCurso.setDirector(lormDirector);
-					lormCurso.setJefeadministracion(null);
-					orm.CursoDAO.save(lormCurso);//se desactiva el curso
-					
-					//se busca al profesor asignado a al curso
-					orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.loadCurso_profesorByQuery(condicionCurso, null);
-					
-					orm.Curso_profesorDAO.delete(lormCurso_profesor);//se elimina la asignacion de ese profesor
-					actualizarCambios(lormCurso_profesor.getProfesor().getPersona().getRut());//se busca la nueva cantidad de cursos
-					
-					//se buscan todos los estudiantes que estaban inscritos en ese curso 
-					orm.Estudiante_curso[] ormEstudiante_cursos = orm.Estudiante_cursoDAO.listEstudiante_cursoByQuery(condicionCurso, null);
-					
-					if(ormEstudiante_cursos!=null){//si la cantdad es distinta de cero, se recorre el arreglo y se elimina la asignación
-					int length = ormEstudiante_cursos.length;
-					for (int i = 0; i < length; i++) {
-						orm.Estudiante_cursoDAO.delete(ormEstudiante_cursos[i]);
-						actualizarCambios(ormEstudiante_cursos[i].getEstudiante().getPersona().getRut());//se busca la nueva cantidad de cursos del alumno
+			if(lormDirector!=null){
+				if(lormCurso!=null){
+					//el estado "1" representa que el curso está activado
+					if(lormCurso.getEstadocurso()==1){
+						lormCurso.setEstadocurso(0);
+						lormCurso.setDirector(lormDirector);
+						lormCurso.setJefeadministracion(null);
+						orm.CursoDAO.save(lormCurso);//se desactiva el curso
+						
+						//se busca al profesor asignado a al curso
+						orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.loadCurso_profesorByQuery(condicionCurso, null);
+						
+						orm.Curso_profesorDAO.delete(lormCurso_profesor);//se elimina la asignacion de ese profesor
+						actualizarCambios(lormCurso_profesor.getProfesor().getPersona().getRut());//se busca la nueva cantidad de cursos
+						
+						//se buscan todos los estudiantes que estaban inscritos en ese curso 
+						orm.Estudiante_curso[] ormEstudiante_cursos = orm.Estudiante_cursoDAO.listEstudiante_cursoByQuery(condicionCurso, null);
+						
+						if(ormEstudiante_cursos!=null){//si la cantdad es distinta de cero, se recorre el arreglo y se elimina la asignación
+						int length = ormEstudiante_cursos.length;
+						for (int i = 0; i < length; i++) {
+							orm.Estudiante_cursoDAO.delete(ormEstudiante_cursos[i]);
+							actualizarCambios(ormEstudiante_cursos[i].getEstudiante().getPersona().getRut());//se busca la nueva cantidad de cursos del alumno
+						}
+						}
+						return "Curso desactivado Exitosamente";
+					} else {
+						return "El curso ya se encontraba desactivado";
 					}
-					}
-					return "Curso desactivado Exitosamente";
-				} else {
-					return "El curso ya se encontraba desactivado";
+				}else {
+					return "El curso no existe";
 				}
 			} else {
-				return "Curso o director no existenten";
+				return "Director Incorrecto";
 			}
 			
 		} catch (PersistentException e) {
@@ -197,19 +201,35 @@ public class Curso {
 			 * profesor y jefeAdm existen.
 			 * el curso existe , no tiene ningun profesor asignado y su estado es activo
 			 */
-			
-			if ((lormProfesor != null)&&(lormJefeadministracion!=null)&&(condicionCurso!=null)&&(lormCurso_profesor2==null)&&(lormCurso.getEstadocurso()!=0)) {
-				orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.createCurso_profesor();
-				
-				lormCurso_profesor.setCurso(lormCurso);
-				lormCurso_profesor.setProfesor(lormProfesor);
-				orm.Curso_profesorDAO.save(lormCurso_profesor);
-				actualizarCambios(rutProfe);
+			if(lormCurso!=null){//curso existe
+				if(lormProfesor!=null){//profesor existe
+					if(lormJefeadministracion!=null){//jefe de administracion existe
+						if(lormCurso_profesor2==null){//el curso no tiene profesor asignado
+							if(lormCurso.getEstadocurso()!=0){//el curso se encuentra activo
+								orm.Curso_profesor lormCurso_profesor = orm.Curso_profesorDAO.createCurso_profesor();
 								
-				return "profesor asignado";
-			} else {
-				return "no se pudo asignar el profesor";
+								lormCurso_profesor.setCurso(lormCurso);
+								lormCurso_profesor.setProfesor(lormProfesor);
+								orm.Curso_profesorDAO.save(lormCurso_profesor);
+								actualizarCambios(rutProfe);
+												
+								return "profesor asignado";
+							}else{
+								return "El curso se encuentra desactivado";
+							}
+						}else{
+							return "El curso ya tiene a un profesor asignado";
+						}
+					}else{
+						return "El jefe de administración no existe";
+					}
+				}else{
+					return "Profesor no existe";
+				}
+			}else{
+				return "El curso no existe";
 			}
+
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -267,7 +287,7 @@ public class Curso {
 									lormCurso.setCupos(lormCurso.getCupos() - 1);
 									actualizarCambios(rutEstudiante);//se actualizan los corsos del estudiante
 									orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
-									return "alumno asignado";
+									return "Estudiante asignado";
 								} else {
 									return "No quedan cupos en este curso";
 								}

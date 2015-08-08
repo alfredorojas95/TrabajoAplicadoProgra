@@ -112,6 +112,7 @@ public class Sueldo {
 			}
 			sueldosProfesor = gson.toJson(matriz);
 			return sueldosProfesor;
+
 			}
 			return null;
 		} catch (PersistentException e) {
