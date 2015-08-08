@@ -51,7 +51,7 @@ public class Sueldo {
 					String condicionprof = "profesor.id='" + lormProfesor.getId() + "'"+ " and mes='"+mes+"'";
 					orm.Sueldo lormSueldo = orm.SueldoDAO.loadSueldoByQuery(condicionprof, null);
 					//orm.Sueldo_profesor lormSueldo_profesor = orm.Sueldo_profesorDAO.loadSueldo_profesorByQuery(condicionprof, null);
-					System.out.println("Nombre: " + lormSueldo.getProfesor().getPersona().getNombre() + " mes: " + lormSueldo.getMes());
+					//System.out.println("Nombre: " + lormSueldo.getProfesor().getPersona().getNombre() + " mes: " + lormSueldo.getMes());
 					
 					if(Curso.calcularCantCursos(rutProf)!=0){
 						
@@ -62,7 +62,7 @@ public class Sueldo {
 							orm.SueldoDAO.save(lormSueldo);
 							return "Sueldo pagado exitosamente";
 						}
-						return "El mes se encuentra pagado";
+						return "El mes ya se encuentra pagado";
 					}
 					return "El profesor no tiene cursos";	
 				}

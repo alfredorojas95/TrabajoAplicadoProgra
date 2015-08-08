@@ -35,27 +35,32 @@ public class Matricula {
 				orm.Secretaria lormSecretaria = orm.SecretariaDAO.loadSecretariaByQuery(condicionSecretaria, null);
 
 				//estudiante y secretaria existen en la base de datos
-				if (lormEstudiante != null && lormSecretaria != null) {
-					String buscarMatricula = "estudiante='" + lormEstudiante + "'";
-					orm.Matricula lormMatriculaExiste = orm.MatriculaDAO.loadMatriculaByQuery(buscarMatricula, null);
-					// validar que la matricula no se encuentre pagada
-					// Si el estado de la matricula es 0, quiere decir que no se
-					// encuentra pagada y se puede proceder
-					if (lormMatriculaExiste.getEstadoMatricula() == 0) {
-						// Condicion de busqueda de matricula, la busqueda se realiza por el id de estudiante
-						
-						// Enviar valores a matricula
-						lormMatriculaExiste.setEstadoMatricula(1);
-						lormMatriculaExiste.setMonto(monto);
-						lormMatriculaExiste.setSecretaria(lormSecretaria);
-						// Guardar matricula
-						orm.MatriculaDAO.save(lormMatriculaExiste);
-						return "matricula pagada exitosamente";
+				if (lormSecretaria != null){
+					if( lormEstudiante!= null){
+						String buscarMatricula = "estudiante='" + lormEstudiante + "'";
+						orm.Matricula lormMatriculaExiste = orm.MatriculaDAO.loadMatriculaByQuery(buscarMatricula, null);
+						// validar que la matricula no se encuentre pagada
+						// Si el estado de la matricula es 0, quiere decir que no se
+						// encuentra pagada y se puede proceder
+						if (lormMatriculaExiste.getEstadoMatricula() == 0) {
+							// Condicion de busqueda de matricula, la busqueda se realiza por el id de estudiante
+							
+							// Enviar valores a matricula
+							lormMatriculaExiste.setEstadoMatricula(1);
+							lormMatriculaExiste.setMonto(monto);
+							lormMatriculaExiste.setSecretaria(lormSecretaria);
+							
+							// Guardar matricula
+							orm.MatriculaDAO.save(lormMatriculaExiste);
+							return "Matrícula pagada exitosamente";
+						} else {
+							return "la matricula ya se encuentra pagada";
+						}
 					} else {
-						return "la matricula ya se encuentra pagada";
-					}
+						return "El estudiante ingresado no existe";
+					}				
 				} else {
-					return "no existe estudiante o secretaria";
+					return "La secretaria no existe";
 				}
 			} catch (PersistentException e) {
 				// TODO Auto-generated catch block

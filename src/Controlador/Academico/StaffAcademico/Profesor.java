@@ -127,7 +127,9 @@ public class Profesor extends Persona {
 	        if(esNumero==true){
 	        	nota = Double.parseDouble(notaS);
 	        	nota = Math.rint(nota*100)/100;
-	        	
+	        	if(nota<1 && nota>7 ){
+	        		return "Debe ingresar una nota entre 1.0 y 7.0";
+	        	}
 	        	try {
 	        		//se busca el curso con ese profesor
 	        		String condicionCurso = "curso.id='" + idCurso+ "'"+ "and profesor.persona.rut='" + rutProf + "'";
@@ -138,18 +140,22 @@ public class Profesor extends Persona {
 					orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.loadEstudiante_cursoByQuery(condEstCurso, null);  			
 
 	    			//verificar que el estudiante exista y no se le haya registrado un promedio
-	    			if((lormEstudiante_curso!=null)&&(lormCurso_profesor!=null)){
-	    				
-	    				//verificar que el profesor que quiere registrar el promedio sea el mismo que creo el curso
-	    				if(lormEstudiante_curso.getPromedio()==null){
-	    					lormEstudiante_curso.setPromedio(nota);
+	    			if(lormCurso_profesor!=null){
+	    				if(lormEstudiante_curso!=null){
+	    					if(lormEstudiante_curso.getPromedio()==null){
+		    					lormEstudiante_curso.setPromedio(nota);
+		    					orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
+		    					return "promedio del curso registrado";
+		    			} else if(lormEstudiante_curso.getPromedio()!=null){
+		    				lormEstudiante_curso.setPromedio(nota);
 	    					orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
-	    					return "promedio del curso registrado";
+		    				return "Promedio editado";
+		    			}
+	    				} else {
+	    					return "El estudiante no está registrado en el curso indicado";
+	    				}
 	    			} else {
-	    				return "La nota ya había sido asignada";
-	    			}
-	    			} else {
-	    				return "Profesor o estudiante no corresponden";
+	    				return "El profesor no está a cargo de ese curso";
 	    			}
 	    		} catch (PersistentException e) {
 	    			// TODO Auto-generated catch block
@@ -172,11 +178,14 @@ public class Profesor extends Persona {
 	 */
 	public static String registrarAsistencia(String rutEst, int idCurso, String dato, String rutProf) {
 	       double porcAsistencia = 0;
-
+	       
 	        boolean esNumero = validarDouble(dato);
 	        if(esNumero==true){
 	        	porcAsistencia = Double.parseDouble(dato);
 	        	porcAsistencia = Math.rint(porcAsistencia*100)/100;
+	        	if(porcAsistencia<=0.0 && porcAsistencia>=100 ){
+	        		return "Debe ingresar un porcentaje entre 0 y 100";
+	        	}
 	        	try {
 	        		//se busca el curso con ese profesor
 	        		String condicionCurso = "curso.id='" + idCurso+ "'"+ "and profesor.persona.rut='" + rutProf + "'";
@@ -187,18 +196,22 @@ public class Profesor extends Persona {
 					orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.loadEstudiante_cursoByQuery(condEstCurso, null);  			
 
 	    			//verificar que el estudiante exista y no se le haya registrado un promedio
-	    			if((lormEstudiante_curso!=null)&&(lormCurso_profesor!=null)){
-	    				
-	    				//verificar que el profesor que quiere registrar el promedio sea el mismo que creo el curso
-	    				if(lormEstudiante_curso.getPorcAsistencia()==null){
-	    					lormEstudiante_curso.setPorcAsistencia(porcAsistencia);
+	    			if(lormCurso_profesor!=null){
+	    				if(lormEstudiante_curso!=null){
+	    					if(lormEstudiante_curso.getPorcAsistencia()==null){
+		    					lormEstudiante_curso.setPorcAsistencia(porcAsistencia);
+		    					orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
+		    					return "Porcentaje de asistencia asignado";
+		    			} else if(lormEstudiante_curso.getPorcAsistencia()!=null){
+		    				lormEstudiante_curso.setPorcAsistencia(porcAsistencia);
 	    					orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
-	    					return "Porcentaje de asistencia asignado";
+		    				return "Porcentaje de asistencia editado";
+		    			}
+	    				}else {
+	    					return "El estudiante no está registrado en el curso indicado";
+	    				}
 	    			} else {
-	    				return "El porcentaje ya había sido asignado";
-	    			}
-	    			} else {
-	    				return "Profesor o Estudiante no coinciden";
+	    				return "El profesor no está a cargo de ese curso";
 	    			}
 	    		} catch (PersistentException e) {
 	    			// TODO Auto-generated catch block

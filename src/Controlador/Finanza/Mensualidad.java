@@ -26,10 +26,10 @@ public class Mensualidad {
 	 * @param mes
 	 * @return String mensaje de confirmación
 	 */
-	public static String regPagoMensualidad(String rutSc, String rutEs, int mes) {
+	public static String regPagoMensualidad(String rutEs, String rutSc, int mes) {
 
 		if (mes < 1 || mes > 10) {
-			return "mes invalido";
+			return "Mes inválido";
 		}
 
 		try {
@@ -46,36 +46,44 @@ public class Mensualidad {
 			orm.Matricula lormMatriculaExiste = orm.MatriculaDAO.loadMatriculaByQuery(buscarMatricula, null);
 			
 			// si la secretaria y el estudiante existen
-			if ((lormSecretaria != null) && (lormEstudiante != null)&&(lormMatriculaExiste.getEstadoMatricula()!=0)) {
-				String condicion = "estudiante='" + lormEstudiante + "' " + " and mes='"+mes+"'";
-				orm.Mensualidad lormMensualidad = orm.MensualidadDAO.loadMensualidadByQuery(condicion, null);
-
-				if (lormMensualidad.getMonto() == 0){
-					// Update the properties of the persistent object
-					lormMensualidad.setSecretaria(lormSecretaria);
-					lormMensualidad.setMes(mes);
-					int cant=Curso.calcularCantCursos(rutEs);
-					
-					if(cant!= 0){
-						lormMensualidad.setMonto(cant*10000);
-						lormMensualidad.setCantCursos(cant);
-						orm.MensualidadDAO.save(lormMensualidad);
-						return "se registró el pago de la mensualidad exitosamente";
-					} else {
-						return "no se encontró ningun curso";
+			if (lormSecretaria != null) {
+				if(lormEstudiante != null){
+					if(lormMatriculaExiste.getEstadoMatricula()!=0){
+						
+						String condicion = "estudiante='" + lormEstudiante + "' " + " and mes='"+mes+"'";
+						orm.Mensualidad lormMensualidad = orm.MensualidadDAO.loadMensualidadByQuery(condicion, null);
+						
+						if(lormMensualidad.getMonto() == 0){
+							int cant=Curso.calcularCantCursos(rutEs);
+							if(cant!= 0){
+								lormMensualidad.setSecretaria(lormSecretaria);
+								lormMensualidad.setMes(mes);
+								lormMensualidad.setMonto(cant*10000);
+								lormMensualidad.setCantCursos(cant);
+								orm.MensualidadDAO.save(lormMensualidad);
+								return "se registró el pago de la mensualidad exitosamente";
+							}else{
+								return "El estudiante no registra cursos en este mes";
+							}
+						}else {
+							return "El mes ingresado ya fue pagado";
+						}
+					}else {
+						return "Primero debe pagar la matrícula";
 					}
-				
+				}else {
+					return "El rut del estudiante es incorrecto";
+				}
 			} else {
-				return "La secretaria o el estudiante no existen";
+				return "El rut de la secretaria es incorrecto";
 			}
-		}
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		return null;
 	}
+	
 
 	/**
 	 * este método obtiene el listado de los estudiantes morosos en el pago de la mensualidad
@@ -83,6 +91,10 @@ public class Mensualidad {
 	 * @return
 	 */
 	public static String obtenerListMorososMensualidad(int mes) {
+		if (mes < 1 || mes > 10) {
+			return "Mes inválido";
+		}
+		
 		String matriz[][];
 		Gson gson = new Gson();
 		String listaMorososMensualidad=null;
