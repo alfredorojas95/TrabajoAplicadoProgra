@@ -187,7 +187,7 @@ public class Curso {
 			//verificar que el profesor exista
 			String rutProfesor = "persona.rut='" + rutProfe + "'";
 			orm.Profesor lormProfesor = orm.ProfesorDAO.loadProfesorByQuery(rutProfesor, null);
-			int idProf = lormProfesor.getId();
+
 			
 			/*
 			 * verificar que el mismo curso no se le asigne a dos profesores
@@ -214,21 +214,21 @@ public class Curso {
 								actualizarCambios(rutProfe);
 												
 								return "profesor asignado";
-							}else{
-								return "El curso se encuentra desactivado";
 							}
-						}else{
-							return "El curso ya tiene a un profesor asignado";
+								return "El curso se encuentra desactivado";
+							
 						}
-					}else{
-						return "El jefe de administración no existe";
+							return "El curso ya tiene a un profesor asignado";
+						
 					}
-				}else{
-					return "Profesor no existe";
+						return "El jefe de administración no existe";
+					
 				}
-			}else{
-				return "El curso no existe";
+					return "Profesor no existe";
+				
 			}
+				return "El curso no existe";
+			
 
 		} catch (PersistentException e) {
 			// TODO Auto-generated catch block
@@ -326,10 +326,11 @@ public class Curso {
 			//y se almacenan en un arreglo que será retornado
 			if (lormCurso != null) {
 				String cup = "" + lormCurso.getCupos();
+				String cod = ""+lormCurso.getId();
 				String est = "" + lormCurso.getEstadocurso();
 				String nom = lormCurso.getNombreCurso();
 				String[] datos = { nom, est, cup };
-				System.out.println("|nombre: "+nom+" |Estado: "+est+" |Cupos: "+cup);
+				System.out.println("|nombre: "+nom+"|código: "+cod+ " |Estado: "+est+" |Cupos: "+cup);
 				return datos;
 			} else {
 				return null;

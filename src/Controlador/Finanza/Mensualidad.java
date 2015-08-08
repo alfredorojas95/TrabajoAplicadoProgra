@@ -21,10 +21,10 @@ public class Mensualidad {
 
 	/**
 	 * este método paga la mensualidad de un estudiante
-	 * @param rutSc
 	 * @param rutEs
+	 * @param rutSc
 	 * @param mes
-	 * @return String mensaje de confirmación
+	 * @return
 	 */
 	public static String regPagoMensualidad(String rutEs, String rutSc, int mes) {
 
