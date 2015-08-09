@@ -213,7 +213,7 @@ public class Curso {
 								orm.Curso_profesorDAO.save(lormCurso_profesor);
 								actualizarCambios(rutProfe);
 												
-								return "profesor asignado";
+								return "Profesor asignado";
 							}
 								return "El curso se encuentra desactivado";
 							

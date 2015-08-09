@@ -112,7 +112,7 @@ public class Mensualidad {
 					matriz[i][0]=""+ormMensualidads[i].getEstudiante().getPersona().getRut();
 					matriz[i][1]=""+ormMensualidads[i].getCantCursos();
 					matriz[i][2]=""+ormMensualidads[i].getMes();
-					matriz[i][3]=""+(10000*ormMensualidads[i].getCantCursos());
+					matriz[i][3]=""+(10000*ormMensualidads[i].getCantCursos());//monto
 				}
 				listaMorososMensualidad = gson.toJson(matriz);
 		} catch (PersistentException e) {
