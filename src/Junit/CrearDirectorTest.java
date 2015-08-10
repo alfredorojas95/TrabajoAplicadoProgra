@@ -25,7 +25,7 @@ public class CrearDirectorTest {
 		 * prueba para agregar un Jefe de Administración a la base de datos
 		 */	
 		String resultado="";
-		resultado =Director.agregarNuevoDirector("Juan","Toloza","92749802","123456");
+		resultado =Director.agregarNuevoDirector("Pablo","Castro","86749802","123456");
 		assertTrue(resultado=="Director ingresado exitosamente");
 	}
 

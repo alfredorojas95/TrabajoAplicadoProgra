@@ -25,9 +25,7 @@ public class CrearCursoTest {
 		 * prueba en que se crea exitosamente un curso
 		 */
 		String resultado="";
-//		resultado = Curso.crearCurso("Calculo","135749802");
-//		resultado = Curso.crearCurso("CalculoI","135749802");
-		resultado = Curso.crearCurso("Física","135749802");
+		resultado = Curso.crearCurso("Anatomía","135749802");
 		System.out.println(resultado);
 //		assertTrue(resultado=="se creo el curso exitosamente");
 	}

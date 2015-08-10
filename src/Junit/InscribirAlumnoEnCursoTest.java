@@ -22,7 +22,8 @@ public class InscribirAlumnoEnCursoTest {
 	public void testInscribirEstudiantes() {
 		String resultado="";
 		//int idCurso, String rutEstudiante, String rutProf
-		resultado = Curso.inscribirEstudiantes(3, "145457641", "137657474");
+		resultado = Curso.inscribirEstudiantes(3, "155457671", "137657474");
+		System.out.println(resultado);
 		assertTrue(resultado=="Este estudiante ya había sido asignado a este curso");
 	}
 

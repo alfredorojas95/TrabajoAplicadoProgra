@@ -23,9 +23,7 @@ public class AsignarProfesorTest {
 	public void testAsignarProfesor() {
 		String resultado="";
 		//int id,String rutProfe,String rutJefeAdm
-		resultado =Curso.asignarProfesor(13,"137657474","135749802");
-		
-//		resultado =Curso.asignarProfesor(20,"137657474","135749802");
+		resultado =Curso.asignarProfesor(6,"137657474","135749802");
 		System.out.println(resultado);
 		assertTrue(resultado=="Profesor asignado");
 	}

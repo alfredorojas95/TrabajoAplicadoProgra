@@ -30,9 +30,9 @@ public class Apoderado extends Persona {
 	 * @param pass
 	 * @return String confirmacion
 	 */
-	public static String agregarNuevoApoderado(String nombre, String apellido, String rut){
+	public static String agregarNuevoApoderado(String nombre, String apellido, String rut,String pass){
 		
-		Persona nuevaPer = new Persona(nombre, apellido, rut);
+		Persona nuevaPer = new Persona(nombre, apellido, rut, pass);
 		try {
 			if (nuevaPer.validarAtributos()) {
 				

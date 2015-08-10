@@ -115,7 +115,7 @@ public class Curso {
 			String nombre = lormCurso.getNombreCurso();
 			int codigo = lormCurso.getId();
 			
-			return "se creó el curso: "+ nombre+", código: "+ codigo;
+			return "Se creó el curso: "+ nombre+", código: "+ codigo;
 			}else{
 				return "Jefe de Administracion inválido";
 			}
@@ -277,26 +277,30 @@ public class Curso {
 					orm.Estudiante lormEstudiante = orm.EstudianteDAO.loadEstudianteByQuery(condicionEstudiante, null);
 					
 					if (lormEstudiante != null) {//estudiante existe
-						if(lormEstudiante_cursoA==null){//el estudiante no está en ese curso
-							if (lormCurso.getEstadocurso() == 1){//curso activo
-								if(lormCurso.getCupos() > 0){//curso con cupos
-									//se crea la relacion estudiante curso
-									orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.createEstudiante_curso();
-									lormEstudiante_curso.setCurso(lormCurso);
-									lormEstudiante_curso.setEstudiante(lormEstudiante);
-									lormCurso.setCupos(lormCurso.getCupos() - 1);
-									actualizarCambios(rutEstudiante);//se actualizan los corsos del estudiante
-									orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
-									return "Estudiante asignado";
+						if(lormEstudiante.getMatricula().getEstadoMatricula()==1){//matricula pagada
+							if(lormEstudiante_cursoA==null){//el estudiante no está en ese curso
+								if (lormCurso.getEstadocurso() == 1){//curso activo
+									if(lormCurso.getCupos() > 0){//curso con cupos
+										//se crea la relacion estudiante curso
+										orm.Estudiante_curso lormEstudiante_curso = orm.Estudiante_cursoDAO.createEstudiante_curso();
+										lormEstudiante_curso.setCurso(lormCurso);
+										lormEstudiante_curso.setEstudiante(lormEstudiante);
+										lormCurso.setCupos(lormCurso.getCupos() - 1);
+										actualizarCambios(rutEstudiante);//se actualizan los corsos del estudiante
+										orm.Estudiante_cursoDAO.save(lormEstudiante_curso);
+										return "Estudiante asignado";
+									} else {
+										return "No quedan cupos en este curso";
+									}
 								} else {
-									return "No quedan cupos en este curso";
+									return "El curso está desactivado";
 								}
-							} else {
-								return "El curso está desactivado";
+							}else{
+								return "Este estudiante ya había sido asignado a este curso";
 							}
-						}else{
-							return "Este estudiante ya había sido asignado a este curso";
 						}
+						return "Debe pagar la matrícula para inscribir curso";
+						
 					} else {
 						return "El estudiante no existe";
 					}				
